@@ -1,0 +1,6 @@
+namespace bombengine
+{
+    struct Core
+    {
+    };
+}
