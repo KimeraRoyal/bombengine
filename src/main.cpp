@@ -4,11 +4,8 @@
 
 int main()
 {
-    bombengine::Core core {};
-
-    std::cout << "Hello, World!" << std::endl;
-
-    core.Squirt();
+    std::shared_ptr<bombengine::Core> core = bombengine::Core::Initialize();
+    core->Run();
 
     return 0;
 }
