@@ -2,6 +2,8 @@
 // Created by s5311430 on 06/10/2023.
 //
 
+#pragma once
+
 #ifndef BOMBENGINE_WINDOW_H
 #define BOMBENGINE_WINDOW_H
 

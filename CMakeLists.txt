@@ -46,11 +46,26 @@ set(GLM_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/glm")
 
 include_directories("${GLM_DIR}")
 
+include_directories(src)
+
+#-------------------------------------------------------------------------
+# Rendering
+#-------------------------------------------------------------------------
+
+add_library(rendering
+)
+
+target_link_libraries(rendering ${GLEW_LIBRARIES})
+target_link_libraries(rendering opengl32)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${GLEW_BINARIES_DIR}/glew32.dll"
+        $<TARGET_FILE_DIR:core>)
+
 #-------------------------------------------------------------------------
 # Core
 #-------------------------------------------------------------------------
-
-include_directories(src)
 
 add_library(core
         src/core/core.cpp
@@ -58,14 +73,8 @@ add_library(core
         src/core/window/context.cpp
 )
 
-target_link_libraries(core ${GLEW_LIBRARIES})
-target_link_libraries(core opengl32)
+target_link_libraries(core rendering)
 target_link_libraries(core ${SDL2_LIBRARIES})
-
-add_custom_command(TARGET core POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${GLEW_BINARIES_DIR}/glew32.dll"
-        $<TARGET_FILE_DIR:core>)
 
 add_custom_command(TARGET core POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
