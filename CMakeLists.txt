@@ -59,6 +59,11 @@ target_link_libraries(core ${SDL2_LIBRARIES})
 
 add_custom_command(TARGET core POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${GLEW_BINARIES_DIR}/glew32.dll"
+        $<TARGET_FILE_DIR:core>)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${SDL2_LIBRARIES_DIR}/sdl2.dll"
         $<TARGET_FILE_DIR:core>)
 

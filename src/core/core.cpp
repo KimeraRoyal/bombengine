@@ -23,7 +23,10 @@ namespace bombengine
         std::shared_ptr<Context> context;
         std::shared_ptr<Window> window = std::make_shared<Window>(context, SDL_WINDOW_OPENGL);
 
-        while(true) {}
+        while(PollEvents() && Update())
+        {
+            Draw();
+        }
     }
 
     bool Core::Update()

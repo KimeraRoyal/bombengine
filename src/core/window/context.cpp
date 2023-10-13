@@ -5,6 +5,7 @@
 #include "context.h"
 
 #include <stdexcept>
+#include <cstdio>
 
 #include <GL/glew.h>
 
@@ -14,11 +15,15 @@ namespace bombengine
         : m_context(nullptr)
     {
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 5);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         m_context = SDL_GL_CreateContext(_window);
-        if(!m_context) { throw std::runtime_error("Could not create GL Context."); }
+        if(!m_context)
+        {
+            std::printf("%s\n", SDL_GetError());
+            throw std::runtime_error("Could not create GL Context.");
+        }
         
         auto glewInitialized = glewInit();
         if(glewInitialized != GLEW_OK) { throw std::runtime_error("Could not initialize glew."); }
