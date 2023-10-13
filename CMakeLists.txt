@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(OpenGL REQUIRED)
 
-# GLEW
+#--------------------------------- GLEW ----------------------------------
 set(GLEW_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/glew")
 
 if(${CMAKE_SIZEOF_VOID_P} MATCHES 8)
@@ -26,7 +26,7 @@ string(STRIP "${GLEW_LIBRARIES}" GLEW_LIBRARIES)
 
 include_directories("${GLEW_DIR}/include")
 
-# SDL2
+#--------------------------------- SDL2 ----------------------------------
 set(SDL2_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/SDL2")
 
 if(${CMAKE_SIZEOF_VOID_P} MATCHES 8)
@@ -40,6 +40,11 @@ set(SDL2_LIBRARIES "${SDL2_LIBRARIES_DIR}/SDL2.lib;${SDL2_LIBRARIES_DIR}/SDL2mai
 string(STRIP "${SDL2_LIBRARIES}" SDL2_LIBRARIES)
 
 include_directories("${SDL2_DIR}/include")
+
+#--------------------------------- GLM -----------------------------------
+set(GLM_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/glm")
+
+include_directories("${GLM_DIR}")
 
 #-------------------------------------------------------------------------
 # Core
