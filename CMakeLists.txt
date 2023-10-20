@@ -53,12 +53,20 @@ include_directories(src)
 #-------------------------------------------------------------------------
 
 add_library(rendering
+        src/rendering/texture/texture.cpp
+        src/rendering/texture/texture.h
+        src/rendering/texture/renderbuffer.cpp
+        src/rendering/texture/renderbuffer.h
+        src/rendering/texture/colorbuffer.cpp
+        src/rendering/texture/colorbuffer.h
+        src/rendering/texture/framebuffer.cpp
+        src/rendering/texture/framebuffer.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
 target_link_libraries(rendering opengl32)
 
-add_custom_command(TARGET core POST_BUILD
+add_custom_command(TARGET rendering POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${GLEW_BINARIES_DIR}/glew32.dll"
         $<TARGET_FILE_DIR:core>)
