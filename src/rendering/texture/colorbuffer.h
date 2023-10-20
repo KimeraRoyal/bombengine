@@ -27,7 +27,7 @@ namespace bombengine
 
         void Generate(GLuint _id, const glm::ivec2& _size);
 
-        [[nodiscard]] GLuint id() const { return m_id; }
+        [[nodiscard]] GLuint GetID() const { return m_id; }
     };
 
 } // bombengine

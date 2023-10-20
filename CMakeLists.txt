@@ -54,13 +54,11 @@ include_directories(src)
 
 add_library(rendering
         src/rendering/texture/texture.cpp
-        src/rendering/texture/texture.h
         src/rendering/texture/renderbuffer.cpp
-        src/rendering/texture/renderbuffer.h
         src/rendering/texture/colorbuffer.cpp
-        src/rendering/texture/colorbuffer.h
         src/rendering/texture/framebuffer.cpp
-        src/rendering/texture/framebuffer.h
+        src/rendering/model/buffer.cpp
+        src/rendering/model/vertexarray.cpp
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})

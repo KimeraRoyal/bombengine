@@ -34,7 +34,7 @@ namespace bombengine
 		}
 
         GenerateColorBuffers();
-        glNamedFramebufferRenderbuffer(m_id, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_renderBuffer.id());
+        glNamedFramebufferRenderbuffer(m_id, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, m_renderBuffer.GetID());
 
         m_dirty = false;
     }
@@ -75,7 +75,7 @@ namespace bombengine
         for(auto i = 0; i < m_colorBuffers.size(); i++)
         {
             glActiveTexture(GL_TEXTURE0 + i);
-            glBindTexture(GL_TEXTURE_2D, m_colorBuffers[i].id());
+            glBindTexture(GL_TEXTURE_2D, m_colorBuffers[i].GetID());
             glUniform1i(glGetUniformLocation(_programId, m_textureNames[i].data()), i);
         }
     }

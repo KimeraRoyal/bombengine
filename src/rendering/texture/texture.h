@@ -27,5 +27,4 @@ namespace bombengine
         void Bind(GLuint _programId, int _index) const;
         void Unbind(int _index) const;
     };
-
 } // bombengine

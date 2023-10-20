@@ -20,9 +20,9 @@ namespace bombengine
         RenderBuffer(GLuint _format, const glm::ivec2& _size);
         ~RenderBuffer();
 
-        [[nodiscard]] GLuint id() const { return m_id; }
+        [[nodiscard]] GLuint GetID() const { return m_id; }
 
-        [[nodiscard]] GLuint format() const { return m_format; }
+        [[nodiscard]] GLuint GetFormat() const { return m_format; }
     };
 
 } // bombengine
