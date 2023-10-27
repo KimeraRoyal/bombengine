@@ -10,13 +10,16 @@
 
 namespace bombengine
 {
+	typedef Buffer<float> VertexBuffer;
+	typedef Buffer<unsigned int> ElementBuffer;
+
 	class VertexArray
 	{
 	private:
 		GLuint m_id;
 
-		std::vector<std::shared_ptr<Buffer<float>>> m_vertexBufferObjects;
-		std::shared_ptr<Buffer<unsigned int>> m_elementBufferObject;
+		std::vector<std::shared_ptr<VertexBuffer>> m_vertexBufferObjects;
+		std::shared_ptr<ElementBuffer> m_elementBufferObject;
 
 		GLenum m_drawMode;
 
