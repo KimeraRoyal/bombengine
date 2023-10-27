@@ -5,6 +5,7 @@
 #pragma once
 
 #include "mesh.h"
+#include "rendering/shader/shaderprogram.h"
 
 namespace bombengine
 {
@@ -17,6 +18,8 @@ namespace bombengine
 
 		std::vector<std::shared_ptr<Mesh>> m_meshes;
 	public:
+		void Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix);
+
 		void AddMesh(const std::shared_ptr<Mesh>& _mesh);
 		void AddMesh(const std::vector<std::shared_ptr<Mesh>>& _meshes);
 	};

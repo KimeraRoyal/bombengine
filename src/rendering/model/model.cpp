@@ -6,6 +6,18 @@
 
 namespace bombengine
 {
+	void Model::Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix)
+	{
+		_program.SetHashedUniform(s_viewMatrixKey, _viewMatrix);
+		_program.SetHashedUniform(s_projectionMatrixKey, _projectionMatrix);
+		_program.SetHashedUniform(s_modelMatrixKey, _modelMatrix);
+
+		for(const auto& mesh : m_meshes)
+		{
+			mesh->Draw();
+		}
+	}
+
 	void Model::AddMesh(const std::shared_ptr<Mesh>& _mesh)
 	{
 		m_meshes.push_back(_mesh);

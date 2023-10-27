@@ -59,11 +59,10 @@ add_library(rendering
         src/rendering/texture/framebuffer.cpp
         src/rendering/model/buffer.cpp
         src/rendering/model/vertexarray.cpp
+        src/rendering/shader/shader.cpp
+        src/rendering/shader/shaderprogram.cpp
         src/rendering/model/mesh.cpp
-        src/rendering/model/mesh.h
-        src/rendering/model/vertex.h
         src/rendering/model/model.cpp
-        src/rendering/model/model.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
