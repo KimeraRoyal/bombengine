@@ -63,6 +63,7 @@ add_library(rendering
         src/rendering/shader/shaderprogram.cpp
         src/rendering/model/mesh.cpp
         src/rendering/model/model.cpp
+        src/rendering/material/material.cpp
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
