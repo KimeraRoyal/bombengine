@@ -22,13 +22,6 @@ namespace bombengine
 
     void Core::Run()
     {
-        std::shared_ptr<Context> context;
-        std::shared_ptr<Window> window = std::make_shared<Window>(context, SDL_WINDOW_OPENGL);
-
-		Shader vertexShader(GL_VERTEX_SHADER, "");
-		Shader fragmentShader(GL_FRAGMENT_SHADER, "");
-		Material material(vertexShader, fragmentShader, nullptr);
-
         while(PollEvents() && Update())
         {
             Draw();
