@@ -64,6 +64,9 @@ add_library(rendering
         src/rendering/model/mesh.cpp
         src/rendering/model/model.cpp
         src/rendering/material/material.cpp
+        src/rendering/camera/projection/orthographicprojection.cpp
+        src/rendering/camera/projection/perspectiveprojection.cpp
+        src/rendering/camera/camera.cpp
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})

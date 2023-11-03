@@ -2,6 +2,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <rendering/material/material.h>
+
 #include "window/window.h"
 
 namespace bombengine
@@ -22,6 +24,10 @@ namespace bombengine
     {
         std::shared_ptr<Context> context;
         std::shared_ptr<Window> window = std::make_shared<Window>(context, SDL_WINDOW_OPENGL);
+
+		Shader vertexShader(GL_VERTEX_SHADER, "");
+		Shader fragmentShader(GL_FRAGMENT_SHADER, "");
+		Material material(vertexShader, fragmentShader, nullptr);
 
         while(PollEvents() && Update())
         {
