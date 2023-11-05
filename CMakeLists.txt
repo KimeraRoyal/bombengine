@@ -3,6 +3,8 @@ project(bombengine)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories(src)
+
 #-------------------------------------------------------------------------
 # Libraries
 #-------------------------------------------------------------------------
@@ -46,7 +48,10 @@ set(GLM_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/glm")
 
 include_directories("${GLM_DIR}")
 
-include_directories(src)
+#--------------------------------- STB -----------------------------------
+set(STB_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/stb")
+
+include_directories("${STB_DIR}")
 
 #-------------------------------------------------------------------------
 # Rendering
@@ -76,6 +81,18 @@ add_custom_command(TARGET rendering POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${GLEW_BINARIES_DIR}/glew32.dll"
         $<TARGET_FILE_DIR:core>)
+
+#-------------------------------------------------------------------------
+# File
+#-------------------------------------------------------------------------
+
+add_library(file
+        src/file/type/imagefile.cpp
+        src/file/type/textfile.cpp
+        src/file/fileloader.cpp
+)
+
+target_link_libraries(file ${SDL2_LIBRARIES})
 
 #-------------------------------------------------------------------------
 # Core
