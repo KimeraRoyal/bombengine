@@ -1,15 +1,22 @@
 #include "core.h"
 
+#include <GL/glew.h>
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb/stb_image.h>
+
 #include <SDL2/SDL.h>
 
-#include <rendering/material/material.h>
-
 #include "window/window.h"
+
+#include "resources/type/textfile.h"
+#include <iostream>
 
 namespace bombengine
 {
     Core::Core()
-        : m_running(true)
+        : m_resources(std::make_shared<Resources>()),
+		m_running(true)
     {
         int sdlInitialized = SDL_Init(SDL_INIT_VIDEO);
         if(sdlInitialized < 0) { throw std::runtime_error("Failed to initialize SDL."); }
@@ -22,6 +29,10 @@ namespace bombengine
 
     void Core::Run()
     {
+		auto textFile = m_resources->GetResource<TextFile>("res/text.txt");
+		if(textFile) { std::cout << textFile->GetData() << "\n"; }
+		else { std::cout << "No text file loaded.\n" << "\n"; }
+
         while(PollEvents() && Update())
         {
             Draw();

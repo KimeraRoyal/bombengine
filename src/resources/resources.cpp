@@ -2,13 +2,13 @@
 // Created by Kimera Royal on 05/11/2023.
 //
 
-#include "fileloader.h"
+#include "resources.h"
 
 #include <SDL2/SDL_filesystem.h>
 
 namespace bombengine
 {
-	FileLoader::FileLoader()
+	Resources::Resources()
 	{
 		char* sdlBasePath = SDL_GetBasePath();
 
@@ -19,7 +19,7 @@ namespace bombengine
 		SDL_free(sdlBasePath);
 	}
 
-	std::filesystem::path FileLoader::GetAbsolutePath(const std::filesystem::path &_path)
+	std::filesystem::path Resources::GetAbsolutePath(const std::filesystem::path &_path)
 	{
 		std::filesystem::path filePath(_path);
 		if(filePath.is_relative())

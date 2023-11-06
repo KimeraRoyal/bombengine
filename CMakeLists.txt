@@ -53,6 +53,57 @@ set(STB_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/stb")
 
 include_directories("${STB_DIR}")
 
+#-------------------------------- ZLIB -----------------------------------
+set(ZLIB_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/zlib")
+
+if(${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+    set(ZLIB_LIBRARIES_DIR "${ZLIB_DIR}/lib/x64")
+    set(ZLIB_BINARIES_DIR "${ZLIB_DIR}/bin/x64")
+else ()
+    set(ZLIB_LIBRARIES_DIR "${ZLIB_DIR}/lib/x86")
+    set(ZLIB_BINARIES_DIR "${ZLIB_DIR}/bin/x86")
+endif()
+
+set(ZLIB_LIBRARIES "${ZLIB_LIBRARIES_DIR}/zlib.lib")
+
+string(STRIP "${ZLIB_LIBRARIES}" ZLIB_LIBRARIES)
+
+include_directories("${ZLIB_DIR}/include")
+
+#------------------------------- PUGIXML ---------------------------------
+set(PUGIXML_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/pugixml")
+
+if(${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+    set(PUGIXML_LIBRARIES_DIR "${PUGIXML_DIR}/lib/x64")
+    set(PUGIXML_BINARIES_DIR "${PUGIXML_DIR}/bin/x64")
+else ()
+    set(PUGIXML_LIBRARIES_DIR "${PUGIXML_DIR}/lib/x86")
+    set(PUGIXML_BINARIES_DIR "${PUGIXML_DIR}/bin/x86")
+endif()
+
+set(PUGIXML_LIBRARIES "${PUGIXML_LIBRARIES_DIR}/pugixml.lib")
+
+string(STRIP "${PUGIXML_LIBRARIES}" PUGIXML_LIBRARIES)
+
+include_directories("${PUGIXML_DIR}/include")
+
+#------------------------------- ASSIMP ----------------------------------
+set(ASSIMP_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/assimp")
+
+if(${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+    set(ASSIMP_LIBRARIES_DIR "${ASSIMP_DIR}/lib/x64")
+    set(ASSIMP_BINARIES_DIR "${ASSIMP_DIR}/bin/x64")
+else ()
+    set(ASSIMP_LIBRARIES_DIR "${ASSIMP_DIR}/lib/x86")
+    set(ASSIMP_BINARIES_DIR "${ASSIMP_DIR}/bin/x86")
+endif()
+
+set(ASSIMP_LIBRARIES "${ASSIMP_LIBRARIES_DIR}/assimp-vc143-mt.lib")
+
+string(STRIP "${ASSIMP_LIBRARIES}" ASSIMP_LIBRARIES)
+
+include_directories("${ASSIMP_DIR}/include")
+
 #-------------------------------------------------------------------------
 # Rendering
 #-------------------------------------------------------------------------
@@ -77,22 +128,22 @@ add_library(rendering
 target_link_libraries(rendering ${GLEW_LIBRARIES})
 target_link_libraries(rendering opengl32)
 
-add_custom_command(TARGET rendering POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${GLEW_BINARIES_DIR}/glew32.dll"
-        $<TARGET_FILE_DIR:core>)
-
 #-------------------------------------------------------------------------
-# File
+# Resource
 #-------------------------------------------------------------------------
 
-add_library(file
-        src/file/type/imagefile.cpp
-        src/file/type/textfile.cpp
-        src/file/fileloader.cpp
+add_library(resources
+        src/resources/resource.cpp
+        src/resources/type/imagefile.cpp
+        src/resources/type/modelfile.cpp
+        src/resources/type/textfile.cpp
+        src/resources/resources.cpp
 )
 
-target_link_libraries(file ${SDL2_LIBRARIES})
+target_link_libraries(resources ${SDL2_LIBRARIES})
+target_link_libraries(resources ${ZLIB_LIBRARIES})
+target_link_libraries(resources ${PUGIXML_LIBRARIES})
+target_link_libraries(resources ${ASSIMP_LIBRARIES})
 
 #-------------------------------------------------------------------------
 # Core
@@ -105,11 +156,31 @@ add_library(core
 )
 
 target_link_libraries(core rendering)
-target_link_libraries(core ${SDL2_LIBRARIES})
+target_link_libraries(core resources)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${GLEW_BINARIES_DIR}/glew32.dll"
+        $<TARGET_FILE_DIR:core>)
 
 add_custom_command(TARGET core POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${SDL2_LIBRARIES_DIR}/sdl2.dll"
+        $<TARGET_FILE_DIR:core>)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${ZLIB_BINARIES_DIR}/zlib1.dll"
+        $<TARGET_FILE_DIR:core>)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PUGIXML_BINARIES_DIR}/pugixml.dll"
+        $<TARGET_FILE_DIR:core>)
+
+add_custom_command(TARGET core POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${ASSIMP_BINARIES_DIR}/assimp-vc143-mt.dll"
         $<TARGET_FILE_DIR:core>)
 
 #-------------------------------------------------------------------------

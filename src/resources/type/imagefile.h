@@ -4,25 +4,29 @@
 
 #pragma once
 
-#include "filetype.h"
+#include "resources/resource.h"
 
 #include <glm/ext/vector_int2.hpp>
 
 namespace bombengine
 {
-	class ImageFile : public FileType
+	class ImageFile : public Resource
 	{
 	private:
 		unsigned char* m_data;
 
 		glm::ivec2 m_size;
+
 	protected:
-		friend class FileLoader;
+		friend class Resources;
 
-		ImageFile();
-
-		void LoadFromPath(const std::filesystem::path& _path) override;
+		explicit ImageFile(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path)
+			: Resource(_resources, _path),
+			m_data(nullptr),
+			m_size(0)
+		{ }
 	public:
+		bool Load() override;
 		~ImageFile();
 
 		[[nodiscard]] unsigned char* GetData() const { return m_data; }
