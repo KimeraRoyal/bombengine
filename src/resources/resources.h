@@ -6,6 +6,7 @@
 
 #include <filesystem>
 #include <map>
+#include <unordered_set>
 #include <memory>
 
 namespace bombengine
@@ -18,6 +19,7 @@ namespace bombengine
 		std::filesystem::path m_basePath;
 
 		std::unordered_map<size_t, std::shared_ptr<Resource>> m_cachedResources;
+		std::unordered_set<size_t> m_resourcesToDelete;
 
 		std::filesystem::path GetAbsolutePath(const std::filesystem::path& _path);
 
@@ -32,6 +34,8 @@ namespace bombengine
 		}
 	public:
 		Resources();
+
+		void Update();
 
 		template<typename T>
 		std::shared_ptr<T> GetResource(const std::filesystem::path& _path)
@@ -62,6 +66,9 @@ namespace bombengine
 				return std::static_pointer_cast<T>(resourceIterator->second);
 			}
 		}
+
+		void ReturnResource(size_t _key);
+		void ReturnResource(const std::filesystem::path& _path);
 	};
 
 } // bombengine

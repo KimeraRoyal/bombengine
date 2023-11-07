@@ -29,4 +29,23 @@ namespace bombengine
 
 		return filePath;
 	}
+
+	void Resources::Update()
+	{
+		for(const auto& resourceToDelete : m_resourcesToDelete)
+		{
+			m_cachedResources.erase(resourceToDelete);
+		}
+		m_resourcesToDelete.clear();
+	}
+
+	void Resources::ReturnResource(const size_t _key)
+	{
+		m_resourcesToDelete.insert(_key);
+	}
+
+	void Resources::ReturnResource(const std::filesystem::path &_path)
+	{
+		ReturnResource(std::hash<std::string>()(_path.string()));
+	}
 } // bombengine

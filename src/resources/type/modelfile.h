@@ -32,6 +32,7 @@ namespace bombengine
 		{ }
 	public:
 		bool Load() override;
+
 		[[nodiscard]] inline std::vector<std::shared_ptr<Mesh>> GetData() const { return m_data; }
 	public:
 	};

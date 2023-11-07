@@ -4,6 +4,8 @@
 
 #include "resource.h"
 
+#include "resources.h"
+
 namespace bombengine
 {
 	Resource::Resource(const std::shared_ptr<Resources>& _resources, const std::filesystem::path &_path)

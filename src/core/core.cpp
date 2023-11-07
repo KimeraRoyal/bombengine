@@ -29,10 +29,6 @@ namespace bombengine
 
     void Core::Run()
     {
-		auto textFile = m_resources->GetResource<TextFile>("res/text.txt");
-		if(textFile) { std::cout << textFile->GetData() << "\n"; }
-		else { std::cout << "No text file loaded.\n" << "\n"; }
-
         while(PollEvents() && Update())
         {
             Draw();
