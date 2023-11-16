@@ -153,6 +153,9 @@ add_library(core
         src/core/core.cpp
         src/core/window/window.cpp
         src/core/window/context.cpp
+        src/core/window/windowmanager.cpp
+        src/core/window/windowmanager.h
+        src/core/window/windowproperties.h
 )
 
 target_link_libraries(core rendering)
@@ -187,6 +190,6 @@ add_custom_command(TARGET core POST_BUILD
 # Demo
 #-------------------------------------------------------------------------
 
-add_executable(demo src/main.cpp)
+add_executable(demo src/demo/main.cpp)
 
 target_link_libraries(demo core)

@@ -4,6 +4,8 @@
 
 #include "resources.h"
 
+#include <algorithm>
+
 #include <SDL2/SDL_filesystem.h>
 
 namespace bombengine

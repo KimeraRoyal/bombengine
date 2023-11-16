@@ -6,10 +6,6 @@
       <option name="SUPERCLASS_LIST_WRAP" value="0" />
     </Objective-C>
     <codeStyleSettings language="ObjectiveC">
-      <option name="RIGHT_MARGIN" value="512" />
-      <option name="KEEP_LINE_BREAKS" value="false" />
-      <option name="BRACE_STYLE" value="2" />
-      <option name="CLASS_BRACE_STYLE" value="2" />
       <indentOptions>
         <option name="USE_TAB_CHARACTER" value="true" />
       </indentOptions>
