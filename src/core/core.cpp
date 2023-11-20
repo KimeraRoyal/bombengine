@@ -15,8 +15,7 @@
 namespace bombengine
 {
     Core::Core()
-        : m_resources(std::make_shared<Resources>()),
-		m_running(true)
+        : m_running(true)
     {
         int sdlInitialized = SDL_Init(SDL_INIT_VIDEO);
         if(sdlInitialized < 0) { throw std::runtime_error("Failed to initialize SDL."); }

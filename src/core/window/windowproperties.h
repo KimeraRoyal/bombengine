@@ -16,13 +16,11 @@ namespace bombengine
 
     struct WindowProperties
     {
-        std::shared_ptr<Context>& m_context;
-
         std::string m_name = "Window";
 
         glm::ivec2 m_position = glm::ivec2(0, 0);
         glm::ivec2 m_size = c_defaultWindowSize;
 
-        Uint32 m_flags;
+        Uint32 m_flags = SDL_WINDOW_OPENGL;
     };
 }

@@ -4,6 +4,8 @@
 
 #include "resources/resources.h"
 
+#include "window/windowmanager.h"
+
 namespace bombengine
 {
     struct Core
@@ -11,7 +13,9 @@ namespace bombengine
     private:
         bool m_running;
 
-		std::shared_ptr<Resources> m_resources;
+		Resources m_resources;
+
+        WindowManager m_windowManager;
 
         Core();
 
@@ -19,12 +23,15 @@ namespace bombengine
         void Draw();
 
         bool PollEvents();
-
     public:
         ~Core();
 
         void Run();
 
         static std::shared_ptr<Core> Initialize();
+
+        Resources* GetResources() { return &m_resources; }
+
+        WindowManager* GetWindowManager() { return &m_windowManager; }
     };
 }

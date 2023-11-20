@@ -15,7 +15,7 @@ namespace bombengine
 
         std::shared_ptr<Context> m_context;
     public:
-        Window(const WindowProperties& _windowProperties);
+        Window(std::shared_ptr<Context>& _context, const WindowProperties& _windowProperties);
         ~Window();
     };
 

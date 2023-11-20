@@ -14,7 +14,9 @@ namespace bombengine
     {
     private:
         std::vector<std::shared_ptr<Window>> m_windows;
+
+        std::shared_ptr<Context> m_context;
     public:
-        std::shared_ptr<Window> CreateWindow();
+        std::shared_ptr<Window> CreateWindow(const WindowProperties& _windowProperties);
     };
 } // bombengine
