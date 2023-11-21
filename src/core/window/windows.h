@@ -10,13 +10,17 @@
 
 namespace bombengine
 {
-    class WindowManager
+    class Windows
     {
     private:
         std::vector<std::shared_ptr<Window>> m_windows;
 
         std::shared_ptr<Context> m_context;
+
+        Windows() = default;
     public:
         std::shared_ptr<Window> CreateWindow(const WindowProperties& _windowProperties);
+
+        static std::shared_ptr<Windows> Initialize();
     };
 } // bombengine

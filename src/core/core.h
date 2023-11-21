@@ -4,34 +4,41 @@
 
 #include "resources/resources.h"
 
-#include "window/windowmanager.h"
+#include "window/windows.h"
+#include "scene/scenes.h"
 
 namespace bombengine
 {
-    struct Core
+    class BombCore : public std::enable_shared_from_this<BombCore>
     {
     private:
         bool m_running;
 
-		Resources m_resources;
+		std::shared_ptr<Resources> m_resources;
 
-        WindowManager m_windowManager;
+        std::shared_ptr<Windows> m_windows;
+        std::shared_ptr<Scenes> m_scenes;
 
-        Core();
+        BombCore();
+        void Load();
 
-        bool Update();
+        bool Update() const;
         void Draw();
 
         bool PollEvents();
     public:
-        ~Core();
+        ~BombCore();
 
-        void Run();
+        void GameLoop();
 
-        static std::shared_ptr<Core> Initialize();
+        std::shared_ptr<Resources> GetResources() { return m_resources; }
 
-        Resources* GetResources() { return &m_resources; }
+        std::shared_ptr<Windows> GetWindows() { return m_windows; }
+        std::shared_ptr<Scenes> GetScenes() { return m_scenes; }
 
-        WindowManager* GetWindowManager() { return &m_windowManager; }
+        [[nodiscard]] bool IsRunning() const { return m_running; }
+        void SetRunning(const bool _running) { m_running = _running; }
+
+        static std::shared_ptr<BombCore> Initialize();
     };
 }

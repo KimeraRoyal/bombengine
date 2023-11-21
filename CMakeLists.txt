@@ -151,11 +151,10 @@ target_link_libraries(resources ${ASSIMP_LIBRARIES})
 
 add_library(core
         src/core/core.cpp
-        src/core/window/window.cpp
         src/core/window/context.cpp
-        src/core/window/windowmanager.cpp
-        src/core/window/windowmanager.h
-        src/core/window/windowproperties.h
+        src/core/window/window.cpp
+        src/core/window/windows.cpp
+        src/core/scene/scenes.cpp
 )
 
 target_link_libraries(core rendering)
@@ -186,10 +185,13 @@ add_custom_command(TARGET core POST_BUILD
         "${ASSIMP_BINARIES_DIR}/assimp-vc143-mt.dll"
         $<TARGET_FILE_DIR:core>)
 
-#-------------------------------------------------------------------------
+#-----------------------------------------------------------------------
 # Demo
-#-------------------------------------------------------------------------
+#-----------------------------------------------------------------------
 
-add_executable(demo src/demo/main.cpp)
+add_executable(demo
+        src/demo/main.cpp
+        src/demo/demoscene.cpp
+)
 
 target_link_libraries(demo core)

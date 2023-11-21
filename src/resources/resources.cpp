@@ -50,4 +50,10 @@ namespace bombengine
 	{
 		ReturnResource(std::hash<std::string>()(_path.string()));
 	}
+
+	std::shared_ptr<Resources> Resources::Initialize()
+	{
+		std::shared_ptr<Resources> resources = std::shared_ptr<Resources>(new Resources);
+		return resources;
+	}
 } // bombengine
