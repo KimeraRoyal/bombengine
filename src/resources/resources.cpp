@@ -32,6 +32,7 @@ namespace bombengine
 
 	void Resources::Update()
 	{
+		if(m_resourcesToDelete.empty()) { return; }
 		for(const auto& resourceToDelete : m_resourcesToDelete)
 		{
 			m_cachedResources.erase(resourceToDelete);
