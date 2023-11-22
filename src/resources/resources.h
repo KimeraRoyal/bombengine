@@ -5,7 +5,7 @@
 #pragma once
 
 #include <filesystem>
-#include <map>
+#include <unordered_map>
 #include <unordered_set>
 #include <memory>
 
@@ -23,6 +23,8 @@ namespace bombengine
 
 		std::filesystem::path GetAbsolutePath(const std::filesystem::path& _path);
 
+		Resources();
+
 		template<typename T>
 		std::shared_ptr<T> LoadResource(const std::filesystem::path& _path)
 		{
@@ -33,8 +35,6 @@ namespace bombengine
 			return resource;
 		}
 	public:
-		Resources();
-
 		void Update();
 
 		template<typename T>
@@ -69,6 +69,8 @@ namespace bombengine
 
 		void ReturnResource(size_t _key);
 		void ReturnResource(const std::filesystem::path& _path);
+
+		static std::shared_ptr<Resources> Initialize();
 	};
 
 } // bombengine

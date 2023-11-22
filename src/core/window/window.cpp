@@ -6,10 +6,10 @@
 
 namespace bombengine
 {
-    Window::Window(std::shared_ptr<Context> &_context, const Uint32 _flags)
+    Window::Window(std::shared_ptr<Context>& _context, const WindowProperties& _windowProperties)
         : m_window(nullptr)
     {
-        m_window = SDL_CreateWindow("Title", 10, 10, 100, 100, _flags);
+        m_window = SDL_CreateWindow(_windowProperties.m_name.c_str(), _windowProperties.m_position.x, _windowProperties.m_position.y, _windowProperties.m_size.x, _windowProperties.m_size.y, _windowProperties.m_flags);
         if(!m_window) { throw std::runtime_error("Could not create SDL Window."); }
 
         if(!_context) { _context = std::make_shared<Context>(m_window); }

@@ -14,20 +14,26 @@
 
 namespace bombengine
 {
-    Core::Core()
-        : m_resources(std::make_shared<Resources>()),
-		m_running(true)
+    BombCore::BombCore()
+        : m_running(true)
     {
-        int sdlInitialized = SDL_Init(SDL_INIT_VIDEO);
-        if(sdlInitialized < 0) { throw std::runtime_error("Failed to initialize SDL."); }
+        if(const int sdlInitialized = SDL_Init(SDL_INIT_VIDEO); sdlInitialized < 0) { throw std::runtime_error("Failed to initialize SDL."); }
     }
 
-    Core::~Core()
+    BombCore::~BombCore()
     {
         SDL_Quit();
     }
 
-    void Core::Run()
+    void BombCore::Load()
+    {
+        m_resources = Resources::Initialize();
+
+		m_windows = Windows::Initialize();
+		m_scenes = Scenes::Initialize(shared_from_this());
+    }
+
+    void BombCore::GameLoop()
     {
         while(PollEvents() && Update())
         {
@@ -35,17 +41,18 @@ namespace bombengine
         }
     }
 
-    bool Core::Update()
+    bool BombCore::Update() const
     {
+        m_scenes->Update();
         return m_running;
     }
 
-    void Core::Draw()
+    void BombCore::Draw()
     {
 
     }
 
-    bool Core::PollEvents()
+    bool BombCore::PollEvents()
     {
         SDL_Event event;
         while(m_running && SDL_PollEvent(&event))
@@ -59,8 +66,10 @@ namespace bombengine
         return m_running;
     }
 
-    std::shared_ptr<Core> Core::Initialize()
+    std::shared_ptr<BombCore> BombCore::Initialize()
     {
-        return std::shared_ptr<Core>(new Core);
+        std::shared_ptr<BombCore> core = std::shared_ptr<BombCore>(new BombCore);
+        core->Load();
+        return core;
     }
 }

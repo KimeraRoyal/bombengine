@@ -4,6 +4,8 @@
 
 #include "resources.h"
 
+#include <algorithm>
+
 #include <SDL2/SDL_filesystem.h>
 
 namespace bombengine
@@ -48,5 +50,11 @@ namespace bombengine
 	void Resources::ReturnResource(const std::filesystem::path &_path)
 	{
 		ReturnResource(std::hash<std::string>()(_path.string()));
+	}
+
+	std::shared_ptr<Resources> Resources::Initialize()
+	{
+		std::shared_ptr<Resources> resources = std::shared_ptr<Resources>(new Resources);
+		return resources;
 	}
 } // bombengine

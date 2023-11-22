@@ -4,12 +4,7 @@
 
 #pragma once
 
-#ifndef BOMBENGINE_WINDOW_H
-#define BOMBENGINE_WINDOW_H
-
-#include <memory>
-
-#include "context.h"
+#include "windowproperties.h"
 
 namespace bombengine
 {
@@ -19,12 +14,9 @@ namespace bombengine
         SDL_Window* m_window;
 
         std::shared_ptr<Context> m_context;
-
     public:
-        Window(std::shared_ptr<Context>& _context, const Uint32 _flags);
+        Window(std::shared_ptr<Context>& _context, const WindowProperties& _windowProperties);
         ~Window();
     };
 
 } // bombengine
-
-#endif //BOMBENGINE_WINDOW_H
