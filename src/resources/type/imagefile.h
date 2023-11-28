@@ -10,13 +10,12 @@
 
 namespace bombengine
 {
-	class ImageFile : public Resource
+	class ImageFile final : public Resource
 	{
 	private:
 		unsigned char* m_data;
 
 		glm::ivec2 m_size;
-
 	protected:
 		friend class Resources;
 
@@ -26,8 +25,9 @@ namespace bombengine
 			m_size(0)
 		{ }
 	public:
+		~ImageFile() override;
+
 		bool Load() override;
-		~ImageFile();
 
 		[[nodiscard]] unsigned char* GetData() const { return m_data; }
 

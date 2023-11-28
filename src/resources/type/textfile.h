@@ -8,7 +8,7 @@
 
 namespace bombengine
 {
-	class TextFile : public Resource
+	class TextFile final : public Resource
 	{
 	private:
 		std::string m_data;

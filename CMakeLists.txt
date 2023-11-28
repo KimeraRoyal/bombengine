@@ -104,6 +104,11 @@ string(STRIP "${ASSIMP_LIBRARIES}" ASSIMP_LIBRARIES)
 
 include_directories("${ASSIMP_DIR}/include")
 
+#------------------------------ RAPIDJSON --------------------------------
+set(RAPIDJSON_DIR "${CMAKE_CURRENT_LIST_DIR}/lib/rapidjson")
+
+include_directories("${RAPIDJSON_DIR}/include")
+
 #-------------------------------------------------------------------------
 # Rendering
 #-------------------------------------------------------------------------
@@ -139,6 +144,8 @@ add_library(resources
         src/resources/type/modelfile.cpp
         src/resources/type/textfile.cpp
         src/resources/resources.cpp
+        src/resources/type/materialfile.cpp
+        src/resources/type/materialfile.h
 )
 
 target_link_libraries(resources ${SDL2_LIBRARIES})

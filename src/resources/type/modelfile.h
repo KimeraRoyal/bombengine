@@ -16,7 +16,7 @@
 
 namespace bombengine
 {
-	class ModelFile : public Resource
+	class ModelFile final : public Resource
 	{
 	private:
 		std::vector<std::shared_ptr<Mesh>> m_data;

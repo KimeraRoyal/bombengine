@@ -9,18 +9,17 @@
 #include <core/core.h>
 
 #include <resources/type/imagefile.h>
-#include <resources/type/textfile.h>
+
+#include "resources/type/materialfile.h"
 
 namespace bombdemo
 {
     bool DemoScene::Load()
     {
-        const std::shared_ptr<bombengine::TextFile> vertexShaderFile = GetResources()->GetResource<bombengine::TextFile>("res/simple.vert");
-        const std::shared_ptr<bombengine::TextFile> fragmentShaderFile = GetResources()->GetResource<bombengine::TextFile>("res/simple.frag");
+        const std::shared_ptr<bombengine::MaterialFile> materialFile = GetResources()->GetResource<bombengine::MaterialFile>("res/simple.json");
 
-        //TODO: Should Shader constructors take a bombengine enum, to encapsulate OpenGL behaviour?
-        bombengine::Shader vertexShader(bombengine::ShaderType::Vertex, vertexShaderFile->GetData());
-        bombengine::Shader fragmentShader(bombengine::ShaderType::Fragment, fragmentShaderFile->GetData());
+        bombengine::Shader vertexShader(bombengine::ShaderType::Vertex, materialFile->GetVertexShader()->GetData());
+        bombengine::Shader fragmentShader(bombengine::ShaderType::Fragment, materialFile->GetFragmentShader()->GetData());
 
         const std::shared_ptr<bombengine::ImageFile> textureFile = GetResources()->GetResource<bombengine::ImageFile>("res/cat.png");
         std::vector<std::shared_ptr<bombengine::Texture>> textures;

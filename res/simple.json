@@ -1,0 +1,8 @@
+{
+	"vertex" : "res/simple.vert",
+	"fragment" : "res/simple.frag",
+	"textures" :
+	[
+		"res/cat.png"
+	]
+}

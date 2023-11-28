@@ -21,6 +21,8 @@ namespace bombengine
 
 		explicit Resource(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path);
 	public:
+		virtual ~Resource() = default;
+
 		virtual bool Load() = 0;
 
 		[[nodiscard]] std::shared_ptr<Resources> GetResources() const;
