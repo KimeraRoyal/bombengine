@@ -195,3 +195,6 @@ add_executable(demo
 )
 
 target_link_libraries(demo core)
+
+add_custom_command(TARGET demo POST_BUILD
+        COMMAND xcopy \"${CMAKE_CURRENT_LIST_DIR}/res\" \"$<TARGET_FILE_DIR:demo>/res\" /e /i /d /y)
