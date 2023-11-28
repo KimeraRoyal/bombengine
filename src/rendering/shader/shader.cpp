@@ -9,13 +9,13 @@
 
 namespace bombengine
 {
-	Shader::Shader(GLint _type, const std::string& _source)
+	Shader::Shader(ShaderType _type, const std::string& _source)
 		: m_attachedProgramId(0),
 		m_id(0)
 	{
 		const GLchar* glSource = _source.c_str();
 
-		m_id = glCreateShader(_type);
+		m_id = glCreateShader(static_cast<GLint>(_type));
 		if(!m_id) { throw std::runtime_error("Could not generate Shader."); }
 
 		glShaderSource(m_id, 1, &glSource, nullptr);

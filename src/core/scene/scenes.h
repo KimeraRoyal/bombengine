@@ -30,7 +30,7 @@ namespace bombengine
 			static_assert(std::is_base_of_v<Scene, T>);
 
             std::shared_ptr<T> scene = std::make_shared<T>();
-            scene->SetSceneManager(shared_from_this());
+            scene->SetManager(shared_from_this());
             if(!scene->Load()) { return nullptr; }
 
             m_scenes.push_back(scene);
@@ -38,5 +38,7 @@ namespace bombengine
         }
 
 		static std::shared_ptr<Scenes> Initialize(const std::shared_ptr<BombCore>& _core);
+
+        std::shared_ptr<BombCore> GetCore() const;
     };
 } // bombengine

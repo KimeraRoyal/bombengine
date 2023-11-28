@@ -123,6 +123,7 @@ add_library(rendering
         src/rendering/camera/projection/orthographicprojection.cpp
         src/rendering/camera/projection/perspectiveprojection.cpp
         src/rendering/camera/camera.cpp
+        src/rendering/shader/shadertype.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
@@ -155,6 +156,7 @@ add_library(core
         src/core/window/window.cpp
         src/core/window/windows.cpp
         src/core/scene/scenes.cpp
+        src/core/scene/scene.cpp
 )
 
 target_link_libraries(core rendering)

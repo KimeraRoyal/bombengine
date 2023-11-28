@@ -8,16 +8,18 @@
 
 namespace bombengine
 {
+    class BombCore;
     class Scenes;
+    class Resources;
 
     class Scene
     {
     private:
         friend class Scenes;
 
-		std::weak_ptr<Scenes> m_sceneManager;
+		std::weak_ptr<Scenes> m_manager;
 
-        void SetSceneManager(const std::shared_ptr<Scenes>& _sceneManager) { m_sceneManager = _sceneManager; }
+        void SetManager(const std::shared_ptr<Scenes>& _sceneManager) { m_manager = _sceneManager; }
     protected:
         virtual bool Load() { return true; }
 
@@ -25,5 +27,9 @@ namespace bombengine
     public:
         Scene() = default;
         virtual ~Scene() = default;
+
+        [[nodiscard]] std::shared_ptr<Scenes> GetManager() const;
+        [[nodiscard]] std::shared_ptr<BombCore> GetCore() const;
+        [[nodiscard]] std::shared_ptr<Resources> GetResources() const;
     };
 } // bombengine

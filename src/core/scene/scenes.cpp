@@ -23,4 +23,11 @@ namespace bombengine
         std::shared_ptr<Scenes> scenes = std::shared_ptr<Scenes>(new Scenes(_core));
         return scenes;
     }
+
+    std::shared_ptr<BombCore> Scenes::GetCore() const
+    {
+        std::shared_ptr<BombCore> core = m_core.lock();
+        if(!core) { throw std::runtime_error("Failed to retrieve pointer to BombEngine Core."); }
+        return core;
+    }
 } // bombengine

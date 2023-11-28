@@ -8,6 +8,8 @@
 
 #include <GL/glew.h>
 
+#include "shadertype.h"
+
 namespace bombengine
 {
 	class Shader
@@ -17,7 +19,7 @@ namespace bombengine
 
 		GLuint m_id;
 	public:
-		Shader(GLint _type, const std::string& _source);
+		Shader(ShaderType _type, const std::string& _source);
 		~Shader();
 
 		void Attach(GLuint _programId);

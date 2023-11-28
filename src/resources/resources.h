@@ -44,27 +44,17 @@ namespace bombengine
 
 			const std::filesystem::path absolutePath = GetAbsolutePath(_path);
 
-			auto resourceIterator = m_cachedResources.find(std::hash<std::string>()(absolutePath.string()));
-			if(resourceIterator == m_cachedResources.end())
-			{
-				return LoadResource<T>(absolutePath);
-			}
-			else
-			{
-				return std::static_pointer_cast<T>(resourceIterator->second);
-			}
+			const auto resourceIterator = m_cachedResources.find(std::hash<std::string>()(absolutePath.string()));
+			return resourceIterator == m_cachedResources.end() ? LoadResource<T>(absolutePath) : std::static_pointer_cast<T>(resourceIterator->second);
 		}
 
 		template<typename T>
-		std::shared_ptr<T> FindResource(size_t _key)
+		std::shared_ptr<T> FindResource(const size_t _key)
 		{
 			static_assert(std::is_base_of_v<Resource, T>);
 
-			auto resourceIterator = m_cachedResources.find(_key);
-			if(resourceIterator != m_cachedResources.end())
-			{
-				return std::static_pointer_cast<T>(resourceIterator->second);
-			}
+			const auto resourceIterator = m_cachedResources.find(_key);
+			return resourceIterator != m_cachedResources.end() ? std::static_pointer_cast<T>(resourceIterator->second) : nullptr;
 		}
 
 		void ReturnResource(size_t _key);
