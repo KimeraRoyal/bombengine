@@ -43,7 +43,12 @@ namespace bombengine
 
     bool BombCore::Update() const
     {
+        m_time.Update();
+        m_input.Update();
+
         m_scenes->Update();
+
+        m_input.PostUpdate();
         return m_running;
     }
 

@@ -2,10 +2,12 @@
 
 #include <memory>
 
+#include "input/input.h"
 #include "resources/resources.h"
 
 #include "window/windows.h"
 #include "scene/scenes.h"
+#include "utility/time.h"
 
 namespace bombengine
 {
@@ -13,6 +15,9 @@ namespace bombengine
     {
     private:
         bool m_running;
+
+        Time m_time;
+        Input m_input;
 
 		std::shared_ptr<Resources> m_resources;
 

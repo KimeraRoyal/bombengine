@@ -164,6 +164,16 @@ add_library(core
         src/core/window/windows.cpp
         src/core/scene/scenes.cpp
         src/core/scene/scene.cpp
+        src/core/input/mouse.cpp
+        src/core/input/mouse.h
+        src/core/input/keyboard.cpp
+        src/core/input/keyboard.h
+        src/core/utility/time.cpp
+        src/core/utility/time.h
+        src/core/utility/bitset.cpp
+        src/core/utility/bitset.h
+        src/core/input/input.cpp
+        src/core/input/input.h
 )
 
 target_link_libraries(core rendering)
