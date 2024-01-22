@@ -18,7 +18,7 @@ namespace bombengine
 
 		std::vector<std::shared_ptr<Mesh>> m_meshes;
 	public:
-		void Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix);
+		void Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix) const;
 
 		void AddMesh(const std::shared_ptr<Mesh>& _mesh);
 		void AddMesh(const std::vector<std::shared_ptr<Mesh>>& _meshes);

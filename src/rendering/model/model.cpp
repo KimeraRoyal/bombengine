@@ -10,7 +10,7 @@ namespace bombengine
 	size_t Model::s_projectionMatrixKey = std::hash<std::string>()("in_Projection");
 	size_t Model::s_modelMatrixKey = std::hash<std::string>()("in_Model");
 
-	void Model::Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix)
+	void Model::Draw(const ShaderProgram& _program, const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix, const glm::mat4& _modelMatrix) const
 	{
 		_program.SetHashedUniform(s_viewMatrixKey, _viewMatrix);
 		_program.SetHashedUniform(s_projectionMatrixKey, _projectionMatrix);

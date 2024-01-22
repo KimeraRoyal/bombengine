@@ -132,6 +132,7 @@ add_library(rendering
         src/rendering/camera/projection/projectiontype.h
         src/rendering/camera/projection/projectionfactory.cpp
         src/rendering/camera/projection/projectionfactory.h
+        src/rendering/camera/CameraTarget.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})

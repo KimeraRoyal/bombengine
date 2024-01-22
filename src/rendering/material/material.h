@@ -15,7 +15,7 @@ namespace bombengine
 	class Material
 	{
 	private:
-		std::unique_ptr<ShaderProgram> m_program;
+		ShaderProgram m_program;
 
 		std::vector<std::shared_ptr<Texture>> m_textures;
 	public:
@@ -23,6 +23,7 @@ namespace bombengine
 		Material(Shader& _vertexShader, Shader& _fragmentShader, const std::shared_ptr<Texture>& _texture);
 
 		void Bind() const;
-		void Unbind() const;
+
+		[[nodiscard]] ShaderProgram& GetProgram() { return m_program; }
 	};
 } // bombengine

@@ -42,13 +42,4 @@ namespace bombengine
         glActiveTexture(GL_TEXTURE0);
     }
 
-    void Texture::Unbind(const int _index) const
-    {
-        glActiveTexture(GL_TEXTURE0 + _index);
-
-        glBindTexture(GL_TEXTURE_2D, 0);
-
-        glActiveTexture(GL_TEXTURE0);
-    }
-
 } // bombengine

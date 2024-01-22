@@ -41,9 +41,9 @@ namespace bombengine
 		void SetUniform(GLint _uniformLocation, const glm::mat4& _value) const;
 
 		template <typename T>
-		void SetHashedUniform(size_t _key, T _value) const
+		void SetHashedUniform(const size_t _key, const T _value) const
 		{
-			if (m_uniformLocations.find(_key) == m_uniformLocations.end()) { return; }
+			if (!m_uniformLocations.contains(_key)) { return; }
 			SetUniform(m_uniformLocations.at(_key), _value);
 		}
 
