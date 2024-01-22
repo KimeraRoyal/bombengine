@@ -178,6 +178,8 @@ add_library(core
         src/core/scene/gameobject.h
         src/core/scene/component.cpp
         src/core/scene/component.h
+        src/core/utility/color.cpp
+        src/core/utility/color.h
 )
 
 target_link_libraries(core rendering)
