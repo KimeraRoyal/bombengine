@@ -129,6 +129,9 @@ add_library(rendering
         src/rendering/camera/projection/perspectiveprojection.cpp
         src/rendering/camera/camera.cpp
         src/rendering/shader/shadertype.h
+        src/rendering/camera/projection/projectiontype.h
+        src/rendering/camera/projection/projectionfactory.cpp
+        src/rendering/camera/projection/projectionfactory.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
@@ -178,6 +181,10 @@ add_library(core
         src/core/scene/gameobject.h
         src/core/scene/component.cpp
         src/core/scene/component.h
+        src/core/scene/component/modelcomponent.cpp
+        src/core/scene/component/modelcomponent.h
+        src/core/scene/component/cameracomponent.cpp
+        src/core/scene/component/cameracomponent.h
         src/core/utility/color.cpp
         src/core/utility/color.h
 )

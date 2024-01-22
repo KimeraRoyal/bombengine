@@ -4,14 +4,16 @@
 
 #include "demoscene.h"
 
-#include <iostream>
+#include "core/core.h"
 
-#include <core/core.h>
-
-#include <resources/type/imagefile.h>
-#include <resources/type/modelfile.h>
-
+#include "resources/type/modelfile.h"
 #include "resources/type/materialfile.h"
+#include "resources/type/imagefile.h"
+
+#include "core/scene/component/cameracomponent.h"
+#include "core/scene/component/modelcomponent.h"
+
+#include "core/utility/color.h"
 
 namespace bombdemo
 {
@@ -26,14 +28,18 @@ namespace bombdemo
         std::vector<std::shared_ptr<bombengine::Texture>> textures;
         textures.push_back(std::make_shared<bombengine::Texture>(textureFile->GetData(), "cat", textureFile->GetSize()));
 
-        m_material = std::make_shared<bombengine::Material>(vertexShader, fragmentShader, textures);
+        const std::shared_ptr<bombengine::Material> material = std::make_shared<bombengine::Material>(vertexShader, fragmentShader, textures);
 
         const std::shared_ptr<bombengine::ModelFile> modelFile = GetResources()->GetResource<bombengine::ModelFile>("res/cube.obj");
 
-        m_model = std::make_shared<bombengine::Model>();
-        m_model->AddMesh(modelFile->GetData());
+        const std::shared_ptr<bombengine::Model> model = std::make_shared<bombengine::Model>();
+        model->AddMesh(modelFile->GetData());
 
-        std::shared_ptr<bombengine::GameObject> gameObject = AddGameObject();
+        const std::shared_ptr<bombengine::GameObject> gameObject = AddGameObject();
+        gameObject->AddComponent(std::make_shared<bombengine::ModelComponent>(model, material));
+
+        const std::shared_ptr<bombengine::GameObject> camera = AddGameObject();
+        camera->AddComponent(std::make_shared<bombengine::CameraComponent>(bombengine::ProjectionType::Perspective, bombengine::Color::c_red));
 
         return true;
     }

@@ -8,7 +8,7 @@
 
 namespace bombengine
 {
-	class OrthographicProjection : public Projection
+	class OrthographicProjection final : public Projection
 	{
 	private:
 		glm::vec2 m_min;

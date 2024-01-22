@@ -28,7 +28,7 @@ namespace bombengine
 
         virtual bool Load() { return true; }
 
-        virtual void Update() { }
+        void Update() const;
 
         void SetManager(const std::shared_ptr<Scenes>& _sceneManager) { m_manager = _sceneManager; }
     public:

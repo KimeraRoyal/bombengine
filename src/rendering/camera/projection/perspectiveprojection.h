@@ -8,7 +8,7 @@
 
 namespace bombengine
 {
-	class PerspectiveProjection : public Projection
+	class PerspectiveProjection final : public Projection
 	{
 	private:
 		float m_fieldOfView;

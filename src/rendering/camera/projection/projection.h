@@ -16,7 +16,10 @@ namespace bombengine
 	public:
 		Projection(const float _near, const float _far)
 			: m_near(_near), m_far(_far)
-		{ }
+		{
+		}
+
+		virtual ~Projection() = default;
 
 		virtual glm::mat4 GetMatrix() = 0;
 

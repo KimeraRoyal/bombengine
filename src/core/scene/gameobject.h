@@ -23,12 +23,14 @@ namespace bombengine
     protected:
         friend class Scene;
 
-        void Update();
+        void Update() const;
 
         void SetScene(const std::shared_ptr<Scene>& _scene) { m_scene = _scene; }
 
         static std::shared_ptr<GameObject> Initialize();
     public:
+        void AddComponent(const std::shared_ptr<Component>& _component);
+
         [[nodiscard]] std::shared_ptr<Scene> GetScene() const;
     };
 } // bombengine

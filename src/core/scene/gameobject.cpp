@@ -6,10 +6,16 @@
 
 #include <stdexcept>
 
+#include "component.h"
+
 namespace bombengine
 {
-    void GameObject::Update()
+    void GameObject::Update() const
     {
+        for(const std::shared_ptr<Component>& component : m_components)
+        {
+            component->Update();
+        }
     }
 
     std::shared_ptr<Scene> GameObject::GetScene() const
@@ -22,5 +28,10 @@ namespace bombengine
     std::shared_ptr<GameObject> GameObject::Initialize()
     {
         return std::shared_ptr<GameObject>(new GameObject);
+    }
+
+    void GameObject::AddComponent(const std::shared_ptr<Component>& _component)
+    {
+        m_components.push_back(_component);
     }
 } // bombengine

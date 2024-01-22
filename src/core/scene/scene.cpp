@@ -4,7 +4,7 @@
 
 #include "scene.h"
 
-#include <core/core.h>
+#include "core/core.h"
 
 #include "scenes.h"
 
@@ -12,6 +12,14 @@
 
 namespace bombengine
 {
+    void Scene::Update() const
+    {
+        for(const std::shared_ptr<GameObject>& gameObject : m_gameObjects)
+        {
+            gameObject->Update();
+        }
+    }
+
     std::shared_ptr<GameObject> Scene::AddGameObject()
     {
         std::shared_ptr<GameObject> gameObject = GameObject::Initialize();
