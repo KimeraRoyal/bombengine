@@ -4,6 +4,8 @@
 
 #include "window.h"
 
+#include <stdexcept>
+
 namespace bombengine
 {
     Window::Window(std::shared_ptr<Context>& _context, const WindowProperties& _windowProperties)

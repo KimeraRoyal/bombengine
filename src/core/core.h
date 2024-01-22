@@ -27,7 +27,7 @@ namespace bombengine
         BombCore();
         void Load();
 
-        bool Update() const;
+        bool Update();
         void Draw();
 
         bool PollEvents();

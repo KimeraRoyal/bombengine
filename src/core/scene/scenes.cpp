@@ -4,6 +4,8 @@
 
 #include "scenes.h"
 
+#include <stdexcept>
+
 namespace bombengine
 {
     Scenes::Scenes(const std::shared_ptr<BombCore>& _core)

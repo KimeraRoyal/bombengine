@@ -5,6 +5,9 @@
 #pragma once
 
 #include <memory>
+#include <vector>
+
+#include "gameobject.h"
 
 namespace bombengine
 {
@@ -15,18 +18,23 @@ namespace bombengine
     class Scene
     {
     private:
-        friend class Scenes;
-
 		std::weak_ptr<Scenes> m_manager;
 
-        void SetManager(const std::shared_ptr<Scenes>& _sceneManager) { m_manager = _sceneManager; }
+        std::vector<std::shared_ptr<GameObject>> m_gameObjects;
     protected:
+        friend class Scenes;
+
+        Scene() = default;
+
         virtual bool Load() { return true; }
 
         virtual void Update() { }
+
+        void SetManager(const std::shared_ptr<Scenes>& _sceneManager) { m_manager = _sceneManager; }
     public:
-        Scene() = default;
         virtual ~Scene() = default;
+
+        std::shared_ptr<GameObject> AddGameObject();
 
         [[nodiscard]] std::shared_ptr<Scenes> GetManager() const;
         [[nodiscard]] std::shared_ptr<BombCore> GetCore() const;

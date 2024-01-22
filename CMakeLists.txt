@@ -174,6 +174,10 @@ add_library(core
         src/core/utility/bitset.h
         src/core/input/input.cpp
         src/core/input/input.h
+        src/core/scene/gameobject.cpp
+        src/core/scene/gameobject.h
+        src/core/scene/component.cpp
+        src/core/scene/component.h
 )
 
 target_link_libraries(core rendering)

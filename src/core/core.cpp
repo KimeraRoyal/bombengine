@@ -41,7 +41,7 @@ namespace bombengine
         }
     }
 
-    bool BombCore::Update() const
+    bool BombCore::Update()
     {
         m_time.Update();
         m_input.Update();

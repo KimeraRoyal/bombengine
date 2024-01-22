@@ -3,6 +3,8 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/glm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/rapidjson" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lib/rapidjson/thirdparty/gtest" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lib/stb/stb" vcs="Git" />
   </component>
 </project>

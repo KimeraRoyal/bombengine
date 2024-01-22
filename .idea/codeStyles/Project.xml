@@ -5,6 +5,11 @@
       <option name="FUNCTION_BRACE_PLACEMENT" value="2" />
       <option name="SUPERCLASS_LIST_WRAP" value="0" />
     </Objective-C>
+    <RiderCodeStyleSettings>
+      <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/LINKAGE_SPECIFICATION_BRACES/@EntryValue" value="NEXT_LINE" type="string" />
+      <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/PLACE_NAMESPACE_DEFINITIONS_ON_SAME_LINE/@EntryValue" />
+      <option name="/Default/CodeStyle/CodeFormatting/CppFormatting/ALLOW_COMMENT_AFTER_LBRACE/@EntryValue" />
+    </RiderCodeStyleSettings>
     <codeStyleSettings language="ObjectiveC">
       <indentOptions>
         <option name="USE_TAB_CHARACTER" value="true" />

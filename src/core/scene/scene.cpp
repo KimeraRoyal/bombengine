@@ -8,8 +8,17 @@
 
 #include "scenes.h"
 
+#include "gameobject.h"
+
 namespace bombengine
 {
+    std::shared_ptr<GameObject> Scene::AddGameObject()
+    {
+        std::shared_ptr<GameObject> gameObject = GameObject::Initialize();
+        m_gameObjects.push_back(gameObject);
+        return gameObject;
+    }
+
     std::shared_ptr<Scenes> Scene::GetManager() const
     {
         std::shared_ptr<Scenes> manager = m_manager.lock();

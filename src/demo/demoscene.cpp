@@ -9,6 +9,7 @@
 #include <core/core.h>
 
 #include <resources/type/imagefile.h>
+#include <resources/type/modelfile.h>
 
 #include "resources/type/materialfile.h"
 
@@ -26,6 +27,13 @@ namespace bombdemo
         textures.push_back(std::make_shared<bombengine::Texture>(textureFile->GetData(), "cat", textureFile->GetSize()));
 
         m_material = std::make_shared<bombengine::Material>(vertexShader, fragmentShader, textures);
+
+        const std::shared_ptr<bombengine::ModelFile> modelFile = GetResources()->GetResource<bombengine::ModelFile>("res/cube.obj");
+
+        m_model = std::make_shared<bombengine::Model>();
+        m_model->AddMesh(modelFile->GetData());
+
+        std::shared_ptr<bombengine::GameObject> gameObject = AddGameObject();
 
         return true;
     }

@@ -3,7 +3,8 @@
 
 ${NAMESPACES_OPEN}
 
-class ${NAME} {
+class ${NAME} 
+{
 
 };
 

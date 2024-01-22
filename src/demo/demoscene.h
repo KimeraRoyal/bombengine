@@ -4,7 +4,9 @@
 
 #pragma once
 
-#include <rendering/material/material.h>
+#include "rendering/material/material.h"
+#include "rendering/model/model.h"
+
 #include "core/scene/scene.h"
 
 namespace bombdemo
@@ -13,7 +15,7 @@ namespace bombdemo
     {
     private:
         std::shared_ptr<bombengine::Material> m_material;
-
+        std::shared_ptr<bombengine::Model> m_model;
     public:
         bool Load() override;
     };

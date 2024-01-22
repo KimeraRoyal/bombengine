@@ -4,6 +4,8 @@
 
 #include "vertexarray.h"
 
+#include <stdexcept>
+
 namespace bombengine
 {
 	VertexArray::VertexArray(GLenum _drawMode)
