@@ -191,6 +191,7 @@ add_library(core
         src/core/window/screen.h
         src/rendering/model/primitive/quad.cpp
         src/rendering/model/primitive/quad.h
+        src/core/window/rendersource.h
 )
 
 target_link_libraries(core rendering)

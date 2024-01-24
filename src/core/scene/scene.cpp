@@ -31,6 +31,7 @@ namespace bombengine
     std::shared_ptr<GameObject> Scene::AddGameObject()
     {
         std::shared_ptr<GameObject> gameObject = GameObject::Initialize();
+        gameObject->SetScene(shared_from_this());
         m_gameObjects.push_back(gameObject);
         return gameObject;
     }

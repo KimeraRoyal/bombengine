@@ -11,16 +11,16 @@
 
 namespace bombengine
 {
-    std::shared_ptr<GameObject> Component::GetParent() const
+    std::shared_ptr<GameObject> Component::GetGameObject() const
     {
-        std::shared_ptr<GameObject> parent = m_parent.lock();
-        if(!parent) { throw std::runtime_error("Failed to retrieve pointer to parent Game Object."); }
-        return parent;
+        std::shared_ptr<GameObject> gameObject = m_gameObject.lock();
+        if(!gameObject) { throw std::runtime_error("Failed to retrieve pointer to parent Game Object."); }
+        return gameObject;
     }
 
     std::shared_ptr<Scene> Component::GetScene() const
     {
-        return GetParent()->GetScene();
+        return GetGameObject()->GetScene();
     }
 
     std::shared_ptr<Scenes> Component::GetManager() const

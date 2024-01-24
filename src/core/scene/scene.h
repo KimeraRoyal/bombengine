@@ -16,7 +16,7 @@ namespace bombengine
     class Scenes;
     class Resources;
 
-    class Scene
+    class Scene : public std::enable_shared_from_this<Scene>
     {
     private:
 		std::weak_ptr<Scenes> m_manager;

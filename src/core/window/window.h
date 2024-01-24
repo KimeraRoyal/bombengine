@@ -4,6 +4,9 @@
 
 #pragma once
 
+#include <vector>
+
+#include "rendersource.h"
 #include "screen.h"
 #include "windowproperties.h"
 
@@ -23,6 +26,8 @@ namespace bombengine
         glm::ivec2 m_size;
 
         Uint32 m_flags;
+
+		std::vector<RenderSource*> m_renderSources;
     public:
         Window(std::shared_ptr<Context>& _context, const WindowProperties& _windowProperties);
         ~Window();
@@ -30,6 +35,10 @@ namespace bombengine
         void Draw() const;
 
         void MakeCurrent() const;
+
+        void AddRenderSource(RenderSource* _renderSource);
+        void RemoveRenderSource(unsigned int _index);
+        void RemoveRenderSource(RenderSource* _renderSource);
 
         [[nodiscard]] std::shared_ptr<Screen> GetScreen() const { return m_screen; }
         void SetScreen(const std::shared_ptr<Screen>& _screen) { m_screen = _screen; }

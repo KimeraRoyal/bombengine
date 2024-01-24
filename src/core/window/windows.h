@@ -23,10 +23,12 @@ namespace bombengine
     public:
         std::shared_ptr<Window> CreateWindow(const WindowProperties& _windowProperties);
 
-        static std::shared_ptr<Windows> Initialize();
+        void Draw() const;
 
         [[nodiscard]] std::shared_ptr<Window> GetWindow(int _index);
 
         [[nodiscard]] glm::ivec2 GetDisplaySize() const { return m_displaySize; }
+
+        static std::shared_ptr<Windows> Initialize();
     };
 } // bombengine

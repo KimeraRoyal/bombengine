@@ -18,10 +18,15 @@ namespace bombengine
         m_renderTexture->AddColorBuffer(GL_RGB, GL_RGB, GL_UNSIGNED_BYTE, GL_LINEAR, GL_CLAMP_TO_EDGE);
     }
 
-    void CameraComponent::PostUpdate()
+    void CameraComponent::Load()
     {
-        m_renderTexture->BindFramebuffer();
+        GetCore()->GetWindows()->GetWindow(0)->AddRenderSource(this);
+    }
+
+    void CameraComponent::Render()
+    {
+        //m_renderTexture->BindFramebuffer();
         m_camera.Draw(glm::inverse(glm::mat4(1.0f)));
-        m_renderTexture->UnbindFramebuffer();
+        //m_renderTexture->UnbindFramebuffer();
     }
 } // bombengine

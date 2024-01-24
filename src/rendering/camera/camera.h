@@ -25,15 +25,15 @@ namespace bombengine
 
 		std::unique_ptr<Projection> m_projection;
 
-		std::vector<Renderable*> m_renderTargets;
+		std::vector<Renderable*> m_renderables;
 	public:
 		explicit Camera(std::unique_ptr<Projection> _projection, glm::vec4 _clearColor = Color::c_black, Uint32 _clearFlags = GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 		void Draw(const glm::mat4& _viewMatrix) const;
 
-		void AddRenderTarget(Renderable* _renderTarget);
-		void RemoveRenderTarget(unsigned int _index);
-		void RemoveRenderTarget(Renderable* _renderTarget);
+		void AddRendererable(Renderable* _renderable);
+		void RemoveRenderable(unsigned int _index);
+		void RemoveRenderable(Renderable* _renderable);
 
 		[[nodiscard]] glm::vec4 GetClearColor() const { return m_clearColor; }
 		void SetClearColor(const glm::vec4 _color) { m_clearColor = _color; }

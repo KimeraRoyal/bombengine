@@ -21,24 +21,24 @@ namespace bombengine
 		glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
 		glClear(m_clearFlags);
 
-		for(auto& target : m_renderTargets)
+		for(auto& target : m_renderables)
 		{
 			target->Draw(_viewMatrix, GetProjectionMatrix());
 		}
 	}
 
-	void Camera::AddRenderTarget(Renderable *_renderTarget)
+	void Camera::AddRendererable(Renderable *_renderable)
 	{
-		m_renderTargets.push_back(_renderTarget);
+		m_renderables.push_back(_renderable);
 	}
 
-	void Camera::RemoveRenderTarget(const unsigned int _index)
+	void Camera::RemoveRenderable(const unsigned int _index)
 	{
-		m_renderTargets.erase(m_renderTargets.begin() + _index);
+		m_renderables.erase(m_renderables.begin() + _index);
 	}
 
-	void Camera::RemoveRenderTarget(Renderable *_renderTarget)
+	void Camera::RemoveRenderable(Renderable *_renderable)
 	{
-		m_renderTargets.erase(std::remove(m_renderTargets.begin(), m_renderTargets.end(), _renderTarget), m_renderTargets.end());
+		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), _renderable), m_renderables.end());
 	}
 } // bombengine

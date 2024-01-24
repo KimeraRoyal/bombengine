@@ -17,7 +17,7 @@ namespace bombengine
     class Component
     {
     private:
-        std::weak_ptr<GameObject> m_parent;
+        std::weak_ptr<GameObject> m_gameObject;
     protected:
         friend class GameObject;
 
@@ -26,12 +26,12 @@ namespace bombengine
         virtual void Update() {}
         virtual void PostUpdate() {}
 
-        void SetParent(const std::shared_ptr<GameObject>& _parent) { m_parent = _parent; }
+        void SetParent(const std::shared_ptr<GameObject>& _parent) { m_gameObject = _parent; }
     public:
         Component() = default;
         virtual ~Component() = default;
 
-        [[nodiscard]] std::shared_ptr<GameObject> GetParent() const;
+        [[nodiscard]] std::shared_ptr<GameObject> GetGameObject() const;
         [[nodiscard]] std::shared_ptr<Scene> GetScene() const;
         [[nodiscard]] std::shared_ptr<Scenes> GetManager() const;
         [[nodiscard]] std::shared_ptr<BombCore> GetCore() const;

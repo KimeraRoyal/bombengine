@@ -5,6 +5,7 @@
 #include "window.h"
 
 #include <stdexcept>
+#include <GL/glew.h>
 
 namespace bombengine
 {
@@ -29,12 +30,34 @@ namespace bombengine
     void Window::Draw() const
     {
         MakeCurrent();
-        if(m_screen) { m_screen->Draw(); }
+
+        for(auto& source : m_renderSources)
+        {
+            source->Render();
+        }
+
+        //if(m_screen) { m_screen->Draw(); }
+
         SDL_GL_SwapWindow(m_window);
     }
 
     void Window::MakeCurrent() const
     {
         SDL_GL_MakeCurrent(m_window, m_context->GetGLContext());
+    }
+
+    void Window::AddRenderSource(RenderSource* _renderSource)
+    {
+		m_renderSources.push_back(_renderSource);
+    }
+
+    void Window::RemoveRenderSource(const unsigned int _index)
+    {
+		m_renderSources.erase(m_renderSources.begin() + _index);
+    }
+
+    void Window::RemoveRenderSource(RenderSource* _renderSource)
+    {
+        m_renderSources.erase(std::remove(m_renderSources.begin(), m_renderSources.end(), _renderSource), m_renderSources.end());
     }
 } // bombengine

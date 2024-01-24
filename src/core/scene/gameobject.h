@@ -12,7 +12,7 @@ namespace bombengine
     class Scene;
     class Component;
 
-    class GameObject
+    class GameObject : public std::enable_shared_from_this<GameObject>
     {
     private:
         std::weak_ptr<Scene> m_scene;

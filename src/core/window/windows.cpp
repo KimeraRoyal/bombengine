@@ -22,6 +22,14 @@ namespace bombengine
         return window;
     }
 
+    void Windows::Draw() const
+    {
+        for(const std::shared_ptr<Window>& window : m_windows)
+        {
+            window->Draw();
+        }
+    }
+
     std::shared_ptr<Window> Windows::GetWindow(const int _index)
     {
         if(_index >= m_windows.size()) { return nullptr; }

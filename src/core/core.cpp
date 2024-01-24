@@ -54,6 +54,8 @@ namespace bombengine
     {
         m_scenes->PostUpdate();
 
+        m_windows->Draw();
+
         m_input.PostUpdate();
     }
 

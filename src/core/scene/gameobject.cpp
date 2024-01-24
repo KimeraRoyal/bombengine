@@ -33,13 +33,15 @@ namespace bombengine
         return scene;
     }
 
+    void GameObject::AddComponent(const std::shared_ptr<Component>& _component)
+    {
+        _component->SetParent(shared_from_this());
+        m_components.push_back(_component);
+        _component->Load();
+    }
+
     std::shared_ptr<GameObject> GameObject::Initialize()
     {
         return std::shared_ptr<GameObject>(new GameObject);
-    }
-
-    void GameObject::AddComponent(const std::shared_ptr<Component>& _component)
-    {
-        m_components.push_back(_component);
     }
 } // bombengine
