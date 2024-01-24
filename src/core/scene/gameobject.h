@@ -24,6 +24,7 @@ namespace bombengine
         friend class Scene;
 
         void Update() const;
+        void PostUpdate() const;
 
         void SetScene(const std::shared_ptr<Scene>& _scene) { m_scene = _scene; }
 

@@ -69,23 +69,14 @@ namespace bombengine
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void FrameBuffer::BindTextures(const GLuint _programId)
+    void FrameBuffer::Bind(const GLuint _programId, int _index)
     {
         Generate();
         for(auto i = 0; i < m_colorBuffers.size(); i++)
         {
-            glActiveTexture(GL_TEXTURE0 + i);
+            glActiveTexture(GL_TEXTURE0 + _index + i);
             glBindTexture(GL_TEXTURE_2D, m_colorBuffers[i].GetID());
-            glUniform1i(glGetUniformLocation(_programId, m_textureNames[i].data()), i);
-        }
-    }
-
-    void FrameBuffer::UnbindTextures() const
-    {
-        for(auto i = 0; i < m_colorBuffers.size(); i++)
-        {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glBindTexture(GL_TEXTURE_2D, 0);
+            glUniform1i(glGetUniformLocation(_programId, m_textureNames[i].data()), _index + i);
         }
     }
 

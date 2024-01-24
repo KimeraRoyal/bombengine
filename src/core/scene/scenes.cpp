@@ -20,6 +20,14 @@ namespace bombengine
         }
     }
 
+    void Scenes::PostUpdate() const
+    {
+        for(const auto& scene : m_scenes)
+        {
+            scene->PostUpdate();
+        }
+    }
+
     std::shared_ptr<Scenes> Scenes::Initialize(const std::shared_ptr<BombCore>& _core)
     {
         std::shared_ptr<Scenes> scenes = std::shared_ptr<Scenes>(new Scenes(_core));

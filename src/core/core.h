@@ -28,7 +28,7 @@ namespace bombengine
         void Load();
 
         bool Update();
-        void Draw();
+        void PostUpdate();
 
         bool PollEvents();
     public:

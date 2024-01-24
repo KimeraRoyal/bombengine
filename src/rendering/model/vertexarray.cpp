@@ -34,8 +34,6 @@ namespace bombengine
 		{
 			glDrawArrays(m_drawMode, 0, static_cast<GLsizei>(GetVertexCount()));
 		}
-
-		glBindVertexArray(0);
 	}
 
 	GLuint VertexArray::GetID()

@@ -24,6 +24,7 @@ namespace bombengine
         virtual void Load() {}
 
         virtual void Update() {}
+        virtual void PostUpdate() {}
 
         void SetParent(const std::shared_ptr<GameObject>& _parent) { m_parent = _parent; }
     public:

@@ -23,6 +23,7 @@ namespace bombengine
 		explicit Scenes(const std::shared_ptr<BombCore>& _core);
     public:
         void Update() const;
+        void PostUpdate() const;
 
         template<typename T>
         std::shared_ptr<T> CreateScene()

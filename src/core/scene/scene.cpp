@@ -20,6 +20,14 @@ namespace bombengine
         }
     }
 
+    void Scene::PostUpdate() const
+    {
+        for(const std::shared_ptr<GameObject>& gameObject : m_gameObjects)
+        {
+            gameObject->PostUpdate();
+        }
+    }
+
     std::shared_ptr<GameObject> Scene::AddGameObject()
     {
         std::shared_ptr<GameObject> gameObject = GameObject::Initialize();

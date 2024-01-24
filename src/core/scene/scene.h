@@ -6,6 +6,7 @@
 
 #include <memory>
 #include <vector>
+#include <core/window/context.h>
 
 #include "gameobject.h"
 
@@ -29,6 +30,7 @@ namespace bombengine
         virtual bool Load() { return true; }
 
         void Update() const;
+        void PostUpdate() const;
 
         void SetManager(const std::shared_ptr<Scenes>& _sceneManager) { m_manager = _sceneManager; }
     public:

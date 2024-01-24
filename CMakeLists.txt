@@ -132,7 +132,6 @@ add_library(rendering
         src/rendering/camera/projection/projectiontype.h
         src/rendering/camera/projection/projectionfactory.cpp
         src/rendering/camera/projection/projectionfactory.h
-        src/rendering/camera/CameraTarget.h
 )
 
 target_link_libraries(rendering ${GLEW_LIBRARIES})
@@ -188,6 +187,10 @@ add_library(core
         src/core/scene/component/cameracomponent.h
         src/core/utility/color.cpp
         src/core/utility/color.h
+        src/core/window/screen.cpp
+        src/core/window/screen.h
+        src/rendering/model/primitive/quad.cpp
+        src/rendering/model/primitive/quad.h
 )
 
 target_link_libraries(core rendering)

@@ -5,19 +5,20 @@
 #include "camera.h"
 
 #include <algorithm>
+#include <SDL2/SDL_video.h>
 
 #include "rendering/renderable.h"
 
 namespace bombengine
 {
-	Camera::Camera(std::unique_ptr<Projection> _projection, const SDL_Color &_clearColor, Uint32 _clearFlags)
-		: m_projection(std::move(_projection)),
-		m_clearColor(_clearColor), m_clearFlags(_clearFlags)
+	Camera::Camera(std::unique_ptr<Projection> _projection, const glm::vec4 _clearColor, Uint32 _clearFlags)
+		: m_clearColor(_clearColor), m_clearFlags(_clearFlags),
+		m_projection(std::move(_projection))
 	{ }
 
-	void Camera::Draw(const glm::mat4 &_viewMatrix)
+	void Camera::Draw(const glm::mat4 &_viewMatrix) const
 	{
-		glClearColor(static_cast<float>(m_clearColor.r) / 255.0f, static_cast<float>(m_clearColor.g) / 255.0f, static_cast<float>(m_clearColor.b) / 255.0f, static_cast<float>(m_clearColor.a) / 255.0f);
+		glClearColor(m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
 		glClear(m_clearFlags);
 
 		for(auto& target : m_renderTargets)

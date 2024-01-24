@@ -7,6 +7,7 @@
 #include <GL/glew.h>
 #include <glm/vec3.hpp>
 #include <rendering/camera/camera.h>
+#include <rendering/texture/framebuffer.h>
 #include <SDL2/SDL_stdinc.h>
 
 #include "core/scene/component.h"
@@ -15,11 +16,17 @@
 
 namespace bombengine
 {
-    class CameraComponent : public Component
+    class CameraComponent final : public Component
     {
     private:
         Camera m_camera;
+
+        std::shared_ptr<FrameBuffer> m_renderTexture;
     public:
-        CameraComponent(ProjectionType _projection, glm::vec3 _clearColor = glm::vec3(0.0f), Uint32 _clearFlags = GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        explicit CameraComponent(ProjectionType _projection, glm::ivec2 _renderTextureSize, glm::vec3 _clearColor = glm::vec3(0.0f), Uint32 _clearFlags = GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+
+        void PostUpdate() override;
+
+        std::shared_ptr<FrameBuffer> GetRenderTexture() const { return m_renderTexture; }
     };
 } // bombengine

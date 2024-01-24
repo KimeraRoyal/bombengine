@@ -19,6 +19,8 @@ namespace bombengine
     public:
         explicit Context(SDL_Window* _window);
         ~Context();
+
+        [[nodiscard]] SDL_GLContext GetGLContext() const { return m_context; };
     };
 
 } // bombengine

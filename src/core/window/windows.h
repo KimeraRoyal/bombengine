@@ -17,10 +17,16 @@ namespace bombengine
 
         std::shared_ptr<Context> m_context;
 
-        Windows() = default;
+        glm::ivec2 m_displaySize;
+
+        Windows();
     public:
         std::shared_ptr<Window> CreateWindow(const WindowProperties& _windowProperties);
 
         static std::shared_ptr<Windows> Initialize();
+
+        [[nodiscard]] std::shared_ptr<Window> GetWindow(int _index);
+
+        [[nodiscard]] glm::ivec2 GetDisplaySize() const { return m_displaySize; }
     };
 } // bombengine

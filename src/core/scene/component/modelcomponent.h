@@ -4,15 +4,16 @@
 
 #pragma once
 
+#include "rendering/renderable.h"
+
 #include "rendering/material/material.h"
 #include "rendering/model/model.h"
 
 #include "core/scene/component.h"
-#include "rendering/camera/CameraTarget.h"
 
 namespace bombengine
 {
-    class ModelComponent final : public Component, public CameraTarget
+    class ModelComponent final : public Component, public Renderable
     {
     private:
         std::shared_ptr<Model> m_model;
@@ -25,6 +26,6 @@ namespace bombengine
         {
         }
 
-        void Draw(glm::mat4 _viewMatrix, glm::mat4 _projectionMatrix) override;
+        void Draw(const glm::mat4& _viewMatrix, const glm::mat4& _projectionMatrix) override;
     };
 } // bombengine

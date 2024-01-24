@@ -35,8 +35,8 @@ namespace bombengine
         void BindFramebuffer();
         void UnbindFramebuffer();
 
-        void BindTextures(GLuint _programId);
-        void UnbindTextures() const;
+        // TODO: Create base class for this and Texture
+        void Bind(GLuint _programId, int _index);
 
         void AddColorBuffer(GLint _internalFormat, GLenum _format, GLenum _type, GLint _filter, GLint _wrap);
         void AddColorBuffers(unsigned int _count, GLint _internalFormat, GLenum _format, GLenum _type, GLint _filter, GLint _wrap);

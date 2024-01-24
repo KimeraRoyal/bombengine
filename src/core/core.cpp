@@ -37,7 +37,7 @@ namespace bombengine
     {
         while(PollEvents() && Update())
         {
-            Draw();
+            PostUpdate();
         }
     }
 
@@ -47,14 +47,14 @@ namespace bombengine
         m_input.Update();
 
         m_scenes->Update();
-
-        m_input.PostUpdate();
         return m_running;
     }
 
-    void BombCore::Draw()
+    void BombCore::PostUpdate()
     {
+        m_scenes->PostUpdate();
 
+        m_input.PostUpdate();
     }
 
     bool BombCore::PollEvents()

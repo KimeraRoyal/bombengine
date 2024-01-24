@@ -18,6 +18,14 @@ namespace bombengine
         }
     }
 
+    void GameObject::PostUpdate() const
+    {
+        for(const std::shared_ptr<Component>& component : m_components)
+        {
+            component->PostUpdate();
+        }
+    }
+
     std::shared_ptr<Scene> GameObject::GetScene() const
     {
         std::shared_ptr<Scene> scene = m_scene.lock();

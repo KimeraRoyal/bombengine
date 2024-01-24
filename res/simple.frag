@@ -1,4 +1,5 @@
 #version 330 core
+
 uniform sampler2D in_Texture;
 
 in vec3 FragPos;
