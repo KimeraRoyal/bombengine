@@ -18,6 +18,11 @@ namespace bombengine
         return gameObject;
     }
 
+    Transform& Component::GetTransform() const
+    {
+        return GetGameObject()->GetTransform();
+    }
+
     std::shared_ptr<Scene> Component::GetScene() const
     {
         return GetGameObject()->GetScene();

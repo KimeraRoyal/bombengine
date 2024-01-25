@@ -10,6 +10,16 @@
 
 namespace bombengine
 {
+    GameObject::GameObject(glm::vec3 _position, glm::quat _rotation, glm::vec3 _scale)
+        : m_transform(_position, _rotation, _scale)
+    {
+    }
+
+    GameObject::GameObject(glm::vec3 _position, glm::vec3 _eulerAngles, glm::vec3 _scale)
+        : m_transform(_position, _eulerAngles, _scale)
+    {
+    }
+
     void GameObject::Update() const
     {
         for(const std::shared_ptr<Component>& component : m_components)
@@ -40,8 +50,13 @@ namespace bombengine
         _component->Load();
     }
 
-    std::shared_ptr<GameObject> GameObject::Initialize()
+    std::shared_ptr<GameObject> GameObject::Initialize(const glm::vec3 _position, const glm::quat _rotation, const glm::vec3 _scale)
     {
-        return std::shared_ptr<GameObject>(new GameObject);
+        return std::shared_ptr<GameObject>(new GameObject(_position, _rotation, _scale));
+    }
+
+    std::shared_ptr<GameObject> GameObject::Initialize(const glm::vec3 _position, const glm::vec3 _eulerAngles, const glm::vec3 _scale)
+    {
+        return std::shared_ptr<GameObject>(new GameObject(_position, _eulerAngles, _scale));
     }
 } // bombengine

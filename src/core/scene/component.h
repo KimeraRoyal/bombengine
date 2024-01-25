@@ -12,7 +12,9 @@ namespace bombengine
     class Scenes;
     class Resources;
     class Scene;
+
     class GameObject;
+    class Transform;
 
     class Component
     {
@@ -32,6 +34,8 @@ namespace bombengine
         virtual ~Component() = default;
 
         [[nodiscard]] std::shared_ptr<GameObject> GetGameObject() const;
+        [[nodiscard]] Transform& GetTransform() const;
+
         [[nodiscard]] std::shared_ptr<Scene> GetScene() const;
         [[nodiscard]] std::shared_ptr<Scenes> GetManager() const;
         [[nodiscard]] std::shared_ptr<BombCore> GetCore() const;
