@@ -16,62 +16,29 @@
 #include "core/utility/color.h"
 
 #include "core/window/screen/screen.h"
+#include "resources/type/screenfile.h"
 
 namespace bombdemo
 {
     bool DemoScene::Load()
     {
-        std::shared_ptr<bombengine::Texture> cat;
+        const std::shared_ptr<bombengine::Window> window = GetCore()->GetWindows()->GetWindow(0);
 
-        /*
-         * Model
-         */
-        {
-            const std::shared_ptr<bombengine::MaterialFile> materialFile = GetResources()->GetResource<bombengine::MaterialFile>("res/simple.json");
+        // Model
+        const std::shared_ptr<bombengine::Material> material = bombengine::MaterialFile::LoadFromFile(GetResources(), "res/simple.json");
+        const std::shared_ptr<bombengine::Model> model = bombengine::ModelFile::LoadFromFile(GetResources(), "res/cube.obj");
 
-            bombengine::Shader vertexShader(bombengine::ShaderType::Vertex, materialFile->GetVertexShader()->GetData());
-            bombengine::Shader fragmentShader(bombengine::ShaderType::Fragment, materialFile->GetFragmentShader()->GetData());
+        const std::shared_ptr<bombengine::GameObject> gameObject = AddGameObject();
+        gameObject->AddComponent(std::make_shared<bombengine::ModelComponent>(model, material));
 
-            const std::shared_ptr<bombengine::ImageFile> textureFile = GetResources()->GetResource<bombengine::ImageFile>("res/cat.png");
-            std::vector<std::shared_ptr<bombengine::Texture>> textures;
-            cat = std::make_shared<bombengine::Texture>(textureFile->GetData(), "cat", textureFile->GetSize());
-            textures.push_back(cat);
+        // Camera
+        const std::shared_ptr<bombengine::GameObject> camera = AddGameObject();
+        const std::shared_ptr<bombengine::CameraComponent> cameraComponent = std::make_shared<bombengine::CameraComponent>(bombengine::ProjectionType::Perspective, window->GetSize(), bombengine::Color::c_red);
+        camera->AddComponent(cameraComponent);
 
-            const std::shared_ptr<bombengine::Material> material = std::make_shared<bombengine::Material>(vertexShader, fragmentShader, textures);
-
-            const std::shared_ptr<bombengine::ModelFile> modelFile = GetResources()->GetResource<bombengine::ModelFile>("res/cube.obj");
-
-            const std::shared_ptr<bombengine::Model> model = std::make_shared<bombengine::Model>();
-            model->AddMesh(modelFile->GetData());
-
-            const std::shared_ptr<bombengine::GameObject> gameObject = AddGameObject();
-            gameObject->AddComponent(std::make_shared<bombengine::ModelComponent>(model, material));
-        }
-
-        /*
-         * Camera
-         */
-        {
-            const std::shared_ptr<bombengine::TextFile> screenVertexFile = GetResources()->GetResource<bombengine::TextFile>("res/shader/screen/screen.vert");
-            const std::shared_ptr<bombengine::TextFile> screenFragmentFile = GetResources()->GetResource<bombengine::TextFile>("res/shader/screen/screen.frag");
-
-            bombengine::Shader vertexShader(bombengine::ShaderType::Vertex, screenVertexFile->GetData());
-            bombengine::Shader fragmentShader(bombengine::ShaderType::Fragment, screenFragmentFile->GetData());
-
-            const std::shared_ptr<bombengine::ShaderProgram> screenShader = std::make_unique<bombengine::ShaderProgram>();
-            vertexShader.Attach(screenShader->GetID());
-            fragmentShader.Attach(screenShader->GetID());
-            screenShader->Link();
-
-            const std::shared_ptr<bombengine::Window> window = GetCore()->GetWindows()->GetWindow(0);
-
-            const std::shared_ptr<bombengine::GameObject> camera = AddGameObject();
-            const std::shared_ptr<bombengine::CameraComponent> cameraComponent = std::make_shared<bombengine::CameraComponent>(bombengine::ProjectionType::Perspective, window->GetSize(), bombengine::Color::c_red);
-            camera->AddComponent(cameraComponent);
-
-            window->GetScreenStack()->AddScreen(std::make_unique<bombengine::Screen>(screenShader, window->GetSize()));
-            window->GetScreenStack()->SetTarget(cameraComponent->GetRenderTexture(), glm::ivec2(0));
-        }
+        // Screen
+        window->GetScreenStack()->AddScreen(bombengine::ScreenFile::LoadFromFile(GetResources(), "res/screen.json", window->GetSize()));
+        window->GetScreenStack()->SetTarget(cameraComponent->GetRenderTexture(), glm::ivec2(0));
 
         return true;
     }

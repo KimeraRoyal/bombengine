@@ -16,6 +16,8 @@
 
 namespace bombengine
 {
+	class Model;
+
 	class ModelFile final : public Resource
 	{
 	private:
@@ -34,6 +36,8 @@ namespace bombengine
 		bool Load() override;
 
 		[[nodiscard]] inline std::vector<std::shared_ptr<Mesh>> GetData() const { return m_data; }
+
+        static std::shared_ptr<Model> LoadFromFile(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path);
 	public:
 	};
 } // bombengine

@@ -150,6 +150,8 @@ add_library(resources
         src/resources/resources.cpp
         src/resources/type/materialfile.cpp
         src/resources/type/materialfile.h
+        src/resources/type/screenfile.cpp
+        src/resources/type/screenfile.h
 )
 
 target_link_libraries(resources ${SDL2_LIBRARIES})
@@ -195,6 +197,8 @@ add_library(core
         src/core/window/rendersource.h
         src/core/window/screen/screenstack.cpp
         src/core/window/screen/screenstack.h
+        src/core/scene/transform.cpp
+        src/core/scene/transform.h
 )
 
 target_link_libraries(core rendering)

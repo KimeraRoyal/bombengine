@@ -1,0 +1,4 @@
+{
+  "vertex" : "res/shader/screen/screen.vert",
+  "fragment" : "res/shader/screen/screen.frag"
+}

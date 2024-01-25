@@ -9,12 +9,13 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
-#include "rendering/texture/graphic.h"
+#include "rendering/shader/shaderprogram.h"
 
 namespace bombengine
 {
     class VertexArray;
-    class ShaderProgram;
+    class Graphic;
+    class Shader;
 
     class Screen
     {
@@ -23,7 +24,7 @@ namespace bombengine
         static const size_t s_modelKey;
 
         std::shared_ptr<VertexArray> m_quad;
-        std::shared_ptr<ShaderProgram> m_program;
+        ShaderProgram m_program;
 
         std::shared_ptr<Graphic> m_target;
 
@@ -35,7 +36,7 @@ namespace bombengine
         glm::mat4 m_modelMatrix;
         bool m_modelMatrixDirty;
     public:
-        Screen(const std::shared_ptr<ShaderProgram>& _program, glm::ivec2 _size);
+        Screen(Shader& _vertexShader, Shader& _fragmentShader, glm::ivec2 _size);
 
         void Draw();
 

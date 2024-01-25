@@ -35,9 +35,9 @@ namespace bombengine
 		void BindAttribute(const std::string& _attribute);
 
 		void SetUniform(GLint _uniformLocation, float _value) const;
-		void SetUniform(GLint _uniformLocation, const glm::vec2& _value) const;
-		void SetUniform(GLint _uniformLocation, const glm::vec3& _value) const;
-		void SetUniform(GLint _uniformLocation, const glm::vec4& _value) const;
+		void SetUniform(GLint _uniformLocation, glm::vec2 _value) const;
+		void SetUniform(GLint _uniformLocation, glm::vec3 _value) const;
+		void SetUniform(GLint _uniformLocation, glm::vec4 _value) const;
 		void SetUniform(GLint _uniformLocation, const glm::mat4& _value) const;
 
 		template <typename T>

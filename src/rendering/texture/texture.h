@@ -19,11 +19,9 @@ namespace bombengine
     private:
         GLuint m_id;
 
-        std::string m_name;
-
         glm::ivec2 m_size;
     public:
-        Texture(const unsigned char* _data, const std::string& _name, const glm::ivec2& _size);
+        Texture(const unsigned char* _data, const glm::ivec2& _size);
         ~Texture() override;
 
         void Bind(GLuint _programId, int _index) override;

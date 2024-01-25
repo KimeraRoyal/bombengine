@@ -8,9 +8,8 @@
 
 namespace bombengine
 {
-    Texture::Texture(const unsigned char* _data, const std::string& _name, const glm::ivec2& _size)
+    Texture::Texture(const unsigned char* _data, const glm::ivec2& _size)
         : m_id(0),
-        m_name(_name),
         m_size(_size)
     {
         glGenTextures(1, &m_id);
@@ -37,7 +36,6 @@ namespace bombengine
         glActiveTexture(GL_TEXTURE0 + _index);
 
         glBindTexture(GL_TEXTURE_2D, m_id);
-        glUniform1i(glGetUniformLocation(_programId, m_name.data()), _index);
 
         glActiveTexture(GL_TEXTURE0);
     }

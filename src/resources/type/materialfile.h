@@ -4,14 +4,18 @@
 
 #pragma once
 
+#include "resources/resource.h"
+
 #include <vector>
-#include <resources/resource.h>
 
 #include "imagefile.h"
 #include "textfile.h"
 
 namespace bombengine
 {
+    class Resources;
+    class Material;
+
     class MaterialFile final : public Resource
     {
     private:
@@ -24,13 +28,16 @@ namespace bombengine
 
         explicit MaterialFile(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path)
             : Resource(_resources, _path)
-        { }
+        {
+        }
     public:
         bool Load() override;
 
 		[[nodiscard]] std::shared_ptr<TextFile> GetVertexShader() const { return m_vertexShader; }
 		[[nodiscard]] std::shared_ptr<TextFile> GetFragmentShader() const { return m_fragmentShader; }
 
-		[[nodiscard]] std::vector<std::shared_ptr<ImageFile>> GetTexture() const { return m_textures; }
+		[[nodiscard]] std::vector<std::shared_ptr<ImageFile>> GetTextures() const { return m_textures; }
+
+        static std::shared_ptr<Material> LoadFromFile(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path);
     };
 } // bombengine

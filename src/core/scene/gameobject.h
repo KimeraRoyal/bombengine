@@ -7,6 +7,8 @@
 #include <memory>
 #include <vector>
 
+#include "transform.h"
+
 namespace bombengine
 {
     class Scene;
@@ -17,9 +19,11 @@ namespace bombengine
     private:
         std::weak_ptr<Scene> m_scene;
 
+        Transform m_transform;
+
         std::vector<std::shared_ptr<Component>> m_components;
 
-        GameObject() = default;
+        GameObject(glm::ve);
     protected:
         friend class Scene;
 

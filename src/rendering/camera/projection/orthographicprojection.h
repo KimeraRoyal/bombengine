@@ -14,7 +14,7 @@ namespace bombengine
 		glm::vec2 m_min;
 		glm::vec2 m_max;
 	public:
-		OrthographicProjection(const glm::vec2& _min, const glm::vec2& _max, float _near, float _far);
+		OrthographicProjection(glm::vec2 _min, glm::vec2 _max, float _near, float _far);
 
 		glm::mat4 GetMatrix() override;
 

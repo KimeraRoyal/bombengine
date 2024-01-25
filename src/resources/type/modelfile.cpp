@@ -8,6 +8,10 @@
 
 #include <assimp/cimport.h>
 
+#include "rendering/model/model.h"
+
+#include "resources/resources.h"
+
 namespace bombengine
 {
 	bool ModelFile::Load()
@@ -75,5 +79,15 @@ namespace bombengine
 		}
 
 		return std::make_shared<Mesh>(vertices, indices);
+	}
+
+	std::shared_ptr<Model> ModelFile::LoadFromFile(const std::shared_ptr<Resources>& _resources, const std::filesystem::path& _path)
+	{
+		const std::shared_ptr<bombengine::ModelFile> modelFile = _resources->GetResource<bombengine::ModelFile>(_path);
+
+		const std::shared_ptr<bombengine::Model> model = std::make_shared<bombengine::Model>();
+		model->AddMesh(modelFile->GetData());
+
+		return model;
 	}
 } // bombengine

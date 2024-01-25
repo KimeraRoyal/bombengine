@@ -11,19 +11,23 @@
 
 #include "rendering/model/vertexarray.h"
 #include "rendering/model/primitive/quad.h"
-#include "rendering/shader/shaderprogram.h"
+#include "rendering/texture/graphic.h"
+#include "rendering/shader/shader.h"
 
 namespace bombengine
 {
     const size_t Screen::s_projectionKey = std::hash<std::string>()("in_Projection");
     const size_t Screen::s_modelKey = std::hash<std::string>()("in_Model");
 
-    Screen::Screen(const std::shared_ptr<ShaderProgram>& _program, const glm::ivec2 _size)
-        : m_quad(Quad::Create()), m_program(_program),
+    Screen::Screen(Shader& _vertexShader, Shader& _fragmentShader, const glm::ivec2 _size)
+        : m_quad(Quad::Create()),
         m_size(_size),
         m_projectionMatrix(1.0f), m_projectionMatrixDirty(true),
         m_modelMatrix(1.0f), m_modelMatrixDirty(true)
     {
+        _vertexShader.Attach(m_program.GetID());
+        _fragmentShader.Attach(m_program.GetID());
+        m_program.Link();
     }
 
     void Screen::Draw()
@@ -36,11 +40,11 @@ namespace bombengine
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(m_program->GetID());
-        m_target->Bind(m_program->GetID(), 0);
+        glUseProgram(m_program.GetID());
+        m_target->Bind(m_program.GetID(), 0);
 
-        m_program->SetHashedUniform(s_projectionKey, GetProjectionMatrix());
-        m_program->SetHashedUniform(s_modelKey, GetModelMatrix());
+        m_program.SetHashedUniform(s_projectionKey, GetProjectionMatrix());
+        m_program.SetHashedUniform(s_modelKey, GetModelMatrix());
         m_quad->Draw();
 
         glDisable(GL_CULL_FACE);
