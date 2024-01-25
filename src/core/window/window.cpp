@@ -36,7 +36,7 @@ namespace bombengine
             source->Render();
         }
 
-        //if(m_screen) { m_screen->Draw(); }
+        if(m_screen) { m_screen->Draw(); }
 
         SDL_GL_SwapWindow(m_window);
     }

@@ -69,7 +69,7 @@ namespace bombengine
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    void FrameBuffer::Bind(const GLuint _programId, int _index)
+    void FrameBuffer::Bind(const GLuint _programId, const int _index)
     {
         Generate();
         for(auto i = 0; i < m_colorBuffers.size(); i++)
@@ -83,11 +83,15 @@ namespace bombengine
     void FrameBuffer::AddColorBuffer(const GLint _internalFormat, const GLenum _format, const GLenum _type, const GLint _filter, const GLint _wrap)
     {
 		m_colorBuffers.emplace_back(_internalFormat, _format, _type, _filter, _wrap);
+
+        m_dirty = true;
     }
 
     void FrameBuffer::AddColorBuffers(const unsigned int _count, const GLint _internalFormat, const GLenum _format, const GLenum _type, const GLint _filter, const GLint _wrap)
     {
 		std::vector<ColorBuffer> newBuffers(_count, ColorBuffer(_internalFormat, _format, _type, _filter, _wrap));
 		m_colorBuffers.insert(m_colorBuffers.end(), newBuffers.begin(), newBuffers.end());
+
+        m_dirty = true;
     }
 } // bombengine

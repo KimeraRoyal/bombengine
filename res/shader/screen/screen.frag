@@ -11,5 +11,5 @@ layout(location = 0) out vec4 out_FragColor;
 void main()
 {
     vec4 tex = texture2D(in_Texture, in_TexCoord);
-    out_FragColor = vec4(in_TexCoord.x, in_TexCoord.y, 0, 1);
+    out_FragColor = vec4(tex.rgb, 1.0);
 }

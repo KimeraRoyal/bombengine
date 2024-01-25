@@ -7,12 +7,13 @@
 #include <string>
 #include <vector>
 
+#include "graphic.h"
 #include "colorbuffer.h"
 #include "renderbuffer.h"
 
 namespace bombengine
 {
-    class FrameBuffer
+    class FrameBuffer final : public Graphic
     {
     private:
         GLuint m_id;
@@ -30,13 +31,13 @@ namespace bombengine
         void GenerateColorBuffers();
     public:
         explicit FrameBuffer(const glm::ivec2& _size, const std::vector<std::string>& _textureNames);
-        ~FrameBuffer();
+        ~FrameBuffer() override;
 
         void BindFramebuffer();
         void UnbindFramebuffer();
 
         // TODO: Create base class for this and Texture
-        void Bind(GLuint _programId, int _index);
+        void Bind(GLuint _programId, int _index) override;
 
         void AddColorBuffer(GLint _internalFormat, GLenum _format, GLenum _type, GLint _filter, GLint _wrap);
         void AddColorBuffers(unsigned int _count, GLint _internalFormat, GLenum _format, GLenum _type, GLint _filter, GLint _wrap);

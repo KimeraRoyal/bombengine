@@ -10,9 +10,11 @@
 
 #include <glm/ext/vector_int2.hpp>
 
+#include "graphic.h"
+
 namespace bombengine
 {
-    class Texture
+    class Texture final : public Graphic
     {
     private:
         GLuint m_id;
@@ -22,8 +24,8 @@ namespace bombengine
         glm::ivec2 m_size;
     public:
         Texture(const unsigned char* _data, const std::string& _name, const glm::ivec2& _size);
-        ~Texture();
+        ~Texture() override;
 
-        void Bind(GLuint _programId, int _index) const;
+        void Bind(GLuint _programId, int _index) override;
     };
 } // bombengine

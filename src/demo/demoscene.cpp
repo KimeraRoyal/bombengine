@@ -19,6 +19,8 @@ namespace bombdemo
 {
     bool DemoScene::Load()
     {
+        std::shared_ptr<bombengine::Texture> cat;
+
         /*
          * Model
          */
@@ -30,7 +32,8 @@ namespace bombdemo
 
             const std::shared_ptr<bombengine::ImageFile> textureFile = GetResources()->GetResource<bombengine::ImageFile>("res/cat.png");
             std::vector<std::shared_ptr<bombengine::Texture>> textures;
-            textures.push_back(std::make_shared<bombengine::Texture>(textureFile->GetData(), "cat", textureFile->GetSize()));
+            cat = std::make_shared<bombengine::Texture>(textureFile->GetData(), "cat", textureFile->GetSize());
+            textures.push_back(cat);
 
             const std::shared_ptr<bombengine::Material> material = std::make_shared<bombengine::Material>(vertexShader, fragmentShader, textures);
 

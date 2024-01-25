@@ -32,7 +32,7 @@ namespace bombengine
         glDeleteTextures(1, &m_id);
     }
 
-    void Texture::Bind(const GLuint _programId, const int _index) const
+    void Texture::Bind(const GLuint _programId, const int _index)
     {
         glActiveTexture(GL_TEXTURE0 + _index);
 

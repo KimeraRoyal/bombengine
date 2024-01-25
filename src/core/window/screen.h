@@ -5,21 +5,16 @@
 #pragma once
 
 #include <memory>
-#include <string>
 
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
-namespace bombengine
-{
-    class FrameBuffer;
-}
+#include "rendering/texture/graphic.h"
 
 namespace bombengine
 {
     class VertexArray;
     class ShaderProgram;
-    class Texture;
 
     class Screen
     {
@@ -30,7 +25,7 @@ namespace bombengine
         std::shared_ptr<VertexArray> m_quad;
         std::shared_ptr<ShaderProgram> m_program;
 
-        std::shared_ptr<FrameBuffer> m_target;
+        std::shared_ptr<Graphic> m_target;
         glm::ivec4 m_targetRegion;
 
         glm::mat4 m_projectionMatrix;
@@ -39,14 +34,14 @@ namespace bombengine
         glm::mat4 m_modelMatrix;
         bool m_modelMatrixDirty;
     public:
-        Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<FrameBuffer>& _target, glm::ivec4 _targetRegion);
+        Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<Graphic>& _target, glm::ivec4 _targetRegion);
 
         void Draw();
 
         glm::mat4 GetProjectionMatrix();
         glm::mat4 GetModelMatrix();
 
-        [[nodiscard]] std::shared_ptr<FrameBuffer> GetTarget() const { return m_target; }
-        void SetTarget(const std::shared_ptr<FrameBuffer>& _target, glm::ivec4 _targetRegion);
+        [[nodiscard]] std::shared_ptr<Graphic> GetTarget() const { return m_target; }
+        void SetTarget(const std::shared_ptr<Graphic>& _target, glm::ivec4 _targetRegion);
     };
 } // bombengine

@@ -12,15 +12,13 @@
 #include "rendering/model/vertexarray.h"
 #include "rendering/model/primitive/quad.h"
 #include "rendering/shader/shaderprogram.h"
-#include "rendering/texture/texture.h"
-#include "rendering/texture/framebuffer.h"
 
 namespace bombengine
 {
     const size_t Screen::s_projectionKey = std::hash<std::string>()("in_Projection");
     const size_t Screen::s_modelKey = std::hash<std::string>()("in_Model");
 
-    Screen::Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<FrameBuffer>& _target, const glm::ivec4 _targetRegion)
+    Screen::Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<Graphic>& _target, const glm::ivec4 _targetRegion)
         : m_quad(Quad::Create()), m_program(_program),
         m_target(_target), m_targetRegion(_targetRegion),
         m_projectionMatrix(1.0f), m_projectionMatrixDirty(true),
@@ -64,7 +62,7 @@ namespace bombengine
         return m_modelMatrix;
     }
 
-    void Screen::SetTarget(const std::shared_ptr<FrameBuffer>& _target, const glm::ivec4 _targetRegion)
+    void Screen::SetTarget(const std::shared_ptr<Graphic>& _target, const glm::ivec4 _targetRegion)
     {
         m_target = _target;
         m_targetRegion = _targetRegion;
