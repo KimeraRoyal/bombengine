@@ -68,7 +68,7 @@ namespace bombdemo
             camera->AddComponent(cameraComponent);
 
             glm::ivec4 targetRegion = glm::ivec4(0, 0, window->GetSize());
-            const std::shared_ptr<bombengine::Screen> screen = std::make_unique<bombengine::Screen>(screenShader, cameraComponent->GetRenderTexture(), targetRegion);
+            const std::shared_ptr<bombengine::Screen> screen = std::make_unique<bombengine::Screen>(screenShader, cat, targetRegion);
             window->SetScreen(screen);
         }
 
