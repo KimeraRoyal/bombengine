@@ -6,10 +6,13 @@
 
 #include <GL/glew.h>
 
-class Graphic
+namespace bombengine
 {
-public:
-    virtual ~Graphic() = default;
+    class Graphic
+    {
+    public:
+        virtual ~Graphic() = default;
 
-    virtual void Bind(GLuint _programId, int _index) = 0;
-};
+        virtual void Bind(GLuint _programId, int _index) = 0;
+    };
+}

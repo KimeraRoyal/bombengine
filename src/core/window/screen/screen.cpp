@@ -18,9 +18,9 @@ namespace bombengine
     const size_t Screen::s_projectionKey = std::hash<std::string>()("in_Projection");
     const size_t Screen::s_modelKey = std::hash<std::string>()("in_Model");
 
-    Screen::Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<Graphic>& _target, const glm::ivec4 _targetRegion)
+    Screen::Screen(const std::shared_ptr<ShaderProgram>& _program, const glm::ivec2 _size)
         : m_quad(Quad::Create()), m_program(_program),
-        m_target(_target), m_targetRegion(_targetRegion),
+        m_size(_size),
         m_projectionMatrix(1.0f), m_projectionMatrixDirty(true),
         m_modelMatrix(1.0f), m_modelMatrixDirty(true)
     {
@@ -28,7 +28,13 @@ namespace bombengine
 
     void Screen::Draw()
     {
-        glViewport(m_targetRegion.x, m_targetRegion.y, m_targetRegion.z, m_targetRegion.w);
+        if(!m_target) { return; }
+
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_MULTISAMPLE);
+        glEnable(GL_CULL_FACE);
+
+        glClear(GL_COLOR_BUFFER_BIT);
 
         glUseProgram(m_program->GetID());
         m_target->Bind(m_program->GetID(), 0);
@@ -36,13 +42,15 @@ namespace bombengine
         m_program->SetHashedUniform(s_projectionKey, GetProjectionMatrix());
         m_program->SetHashedUniform(s_modelKey, GetModelMatrix());
         m_quad->Draw();
+
+        glDisable(GL_CULL_FACE);
     }
 
     glm::mat4 Screen::GetProjectionMatrix()
     {
         if(m_projectionMatrixDirty)
         {
-            m_projectionMatrix = glm::ortho(0.0f, static_cast<float>(m_targetRegion.z), 0.0f, static_cast<float>(m_targetRegion.w), 0.0f, 1.0f);
+            m_projectionMatrix = glm::ortho(0.0f, static_cast<float>(m_size.x), 0.0f, static_cast<float>(m_size.y), 0.0f, 1.0f);
 
             m_projectionMatrixDirty = false;
         }
@@ -54,18 +62,17 @@ namespace bombengine
         if(m_modelMatrixDirty)
         {
             m_modelMatrix = glm::mat4(1.0f);
-            m_modelMatrix = glm::translate(m_modelMatrix, glm::vec3(m_targetRegion.z, m_targetRegion.w, 0.0f) / 2.0f);
-            m_modelMatrix = glm::scale(m_modelMatrix, glm::vec3(m_targetRegion.z, m_targetRegion.w, 1.0f));
+            m_modelMatrix = glm::translate(m_modelMatrix, glm::vec3(m_size.x, m_size.y, 0.0f) / 2.0f);
+            m_modelMatrix = glm::scale(m_modelMatrix, glm::vec3(m_size.x, m_size.y, 1.0f));
 
             m_modelMatrixDirty = false;
         }
         return m_modelMatrix;
     }
 
-    void Screen::SetTarget(const std::shared_ptr<Graphic>& _target, const glm::ivec4 _targetRegion)
+    void Screen::SetTarget(const std::shared_ptr<Graphic>& _target)
     {
         m_target = _target;
-        m_targetRegion = _targetRegion;
 
         m_projectionMatrixDirty = true;
         m_modelMatrixDirty = true;

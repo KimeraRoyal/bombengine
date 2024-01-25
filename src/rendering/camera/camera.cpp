@@ -39,6 +39,11 @@ namespace bombengine
 
 	void Camera::RemoveRenderable(Renderable *_renderable)
 	{
-		m_renderables.erase(std::remove(m_renderables.begin(), m_renderables.end(), _renderable), m_renderables.end());
+		std::erase(m_renderables, _renderable);
+	}
+
+	void Camera::RemoveAllRenderables()
+	{
+		m_renderables.clear();
 	}
 } // bombengine

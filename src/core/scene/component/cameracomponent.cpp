@@ -16,7 +16,7 @@ namespace bombengine
     {
         if(_renderTextureSize.x < 1 || _renderTextureSize.y < 1) { return; }
 
-        m_renderTexture = std::make_unique<FrameBuffer>(_renderTextureSize, std::vector<std::string> { "in_RenderTexture" });
+        m_renderTexture = std::make_unique<FrameBuffer>(_renderTextureSize, std::vector<std::string> { "in_Texture" });
         m_renderTexture->AddColorBuffer(GL_RGB, GL_RGB, GL_UNSIGNED_BYTE, GL_LINEAR, GL_CLAMP_TO_EDGE);
     }
 

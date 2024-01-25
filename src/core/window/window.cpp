@@ -20,6 +20,8 @@ namespace bombengine
 
         if(!_context) { _context = std::make_shared<Context>(m_window); }
         m_context = _context;
+
+        m_screenStack = std::make_unique<ScreenStack>(_windowProperties.m_size);
     }
 
     Window::~Window()
@@ -31,12 +33,12 @@ namespace bombengine
     {
         MakeCurrent();
 
-        for(auto& source : m_renderSources)
+        for(const auto& source : m_renderSources)
         {
             source->Render();
         }
 
-        if(m_screen) { m_screen->Draw(); }
+        m_screenStack->Draw();
 
         SDL_GL_SwapWindow(m_window);
     }
@@ -58,6 +60,11 @@ namespace bombengine
 
     void Window::RemoveRenderSource(RenderSource* _renderSource)
     {
-        m_renderSources.erase(std::remove(m_renderSources.begin(), m_renderSources.end(), _renderSource), m_renderSources.end());
+        std::erase(m_renderSources, _renderSource);
+    }
+
+    void Window::RemoveAllRenderSources()
+    {
+        m_renderSources.clear();
     }
 } // bombengine

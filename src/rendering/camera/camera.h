@@ -34,6 +34,7 @@ namespace bombengine
 		void AddRendererable(Renderable* _renderable);
 		void RemoveRenderable(unsigned int _index);
 		void RemoveRenderable(Renderable* _renderable);
+		void RemoveAllRenderables();
 
 		[[nodiscard]] glm::vec4 GetClearColor() const { return m_clearColor; }
 		void SetClearColor(const glm::vec4 _color) { m_clearColor = _color; }

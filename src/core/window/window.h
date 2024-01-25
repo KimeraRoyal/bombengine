@@ -7,8 +7,8 @@
 #include <vector>
 
 #include "rendersource.h"
-#include "screen.h"
 #include "windowproperties.h"
+#include "screen/screenstack.h"
 
 namespace bombengine
 {
@@ -18,7 +18,7 @@ namespace bombengine
         SDL_Window* m_window;
         std::shared_ptr<Context> m_context;
 
-        std::shared_ptr<Screen> m_screen;
+        std::shared_ptr<ScreenStack> m_screenStack;
 
         std::string m_name;
 
@@ -39,9 +39,9 @@ namespace bombengine
         void AddRenderSource(RenderSource* _renderSource);
         void RemoveRenderSource(unsigned int _index);
         void RemoveRenderSource(RenderSource* _renderSource);
+        void RemoveAllRenderSources();
 
-        [[nodiscard]] std::shared_ptr<Screen> GetScreen() const { return m_screen; }
-        void SetScreen(const std::shared_ptr<Screen>& _screen) { m_screen = _screen; }
+        [[nodiscard]] std::shared_ptr<ScreenStack> GetScreenStack() const { return m_screenStack; }
 
         [[nodiscard]] std::string GetName() const { return m_name; }
 

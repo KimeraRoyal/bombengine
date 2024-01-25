@@ -26,7 +26,8 @@ namespace bombengine
         std::shared_ptr<ShaderProgram> m_program;
 
         std::shared_ptr<Graphic> m_target;
-        glm::ivec4 m_targetRegion;
+
+        glm::ivec2 m_size;
 
         glm::mat4 m_projectionMatrix;
         bool m_projectionMatrixDirty;
@@ -34,7 +35,7 @@ namespace bombengine
         glm::mat4 m_modelMatrix;
         bool m_modelMatrixDirty;
     public:
-        Screen(const std::shared_ptr<ShaderProgram>& _program, const std::shared_ptr<Graphic>& _target, glm::ivec4 _targetRegion);
+        Screen(const std::shared_ptr<ShaderProgram>& _program, glm::ivec2 _size);
 
         void Draw();
 
@@ -42,6 +43,9 @@ namespace bombengine
         glm::mat4 GetModelMatrix();
 
         [[nodiscard]] std::shared_ptr<Graphic> GetTarget() const { return m_target; }
-        void SetTarget(const std::shared_ptr<Graphic>& _target, glm::ivec4 _targetRegion);
+        void SetTarget(const std::shared_ptr<Graphic>& _target);
+
+        [[nodiscard]] glm::ivec2 GetSize() const { return m_size; }
+        void SetSize(const glm::ivec2 _size) { m_size = _size; }
     };
 } // bombengine

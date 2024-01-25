@@ -188,11 +188,13 @@ add_library(core
         src/core/scene/component/cameracomponent.h
         src/core/utility/color.cpp
         src/core/utility/color.h
-        src/core/window/screen.cpp
-        src/core/window/screen.h
+        src/core/window/screen/screen.cpp
+        src/core/window/screen/screen.h
         src/rendering/model/primitive/quad.cpp
         src/rendering/model/primitive/quad.h
         src/core/window/rendersource.h
+        src/core/window/screen/screenstack.cpp
+        src/core/window/screen/screenstack.h
 )
 
 target_link_libraries(core rendering)

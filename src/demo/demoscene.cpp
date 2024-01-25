@@ -15,6 +15,8 @@
 
 #include "core/utility/color.h"
 
+#include "core/window/screen/screen.h"
+
 namespace bombdemo
 {
     bool DemoScene::Load()
@@ -67,9 +69,8 @@ namespace bombdemo
             const std::shared_ptr<bombengine::CameraComponent> cameraComponent = std::make_shared<bombengine::CameraComponent>(bombengine::ProjectionType::Perspective, window->GetSize(), bombengine::Color::c_red);
             camera->AddComponent(cameraComponent);
 
-            glm::ivec4 targetRegion = glm::ivec4(0, 0, window->GetSize());
-            const std::shared_ptr<bombengine::Screen> screen = std::make_unique<bombengine::Screen>(screenShader, cat, targetRegion);
-            window->SetScreen(screen);
+            window->GetScreenStack()->AddScreen(std::make_unique<bombengine::Screen>(screenShader, window->GetSize()));
+            window->GetScreenStack()->SetTarget(cameraComponent->GetRenderTexture(), glm::ivec2(0));
         }
 
         return true;

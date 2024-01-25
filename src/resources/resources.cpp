@@ -8,6 +8,8 @@
 
 #include <SDL2/SDL_filesystem.h>
 
+#include <stb/stb_image.h>
+
 namespace bombengine
 {
 	Resources::Resources()
@@ -19,6 +21,8 @@ namespace bombengine
 		m_basePath = basePath;
 
 		SDL_free(sdlBasePath);
+
+		stbi_set_flip_vertically_on_load(true);
 	}
 
 	std::filesystem::path Resources::GetAbsolutePath(const std::filesystem::path &_path)
